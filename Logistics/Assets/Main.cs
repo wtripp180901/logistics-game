@@ -10,9 +10,13 @@ public class Main : MonoBehaviour {
     void Start () {
         map = new Map(new MapGenerator(2, 900, 10, 10));
     }
-	
+
+    TransportHubFeature source;
+    TransportHubFeature dest;
+
 	// Update is called once per frame
 	void Update () {
+        //Debug shit**********************************
         if (Input.GetKeyDown("q"))
         {
             DrawingManager.startDrawing(new ConnectionDrawer(map,FEATURES.RAIL));
@@ -21,7 +25,16 @@ public class Main : MonoBehaviour {
         {
             DrawingManager.startDrawing(new HubDrawer(map, FEATURES.RAILYARD));
         }
-        if (Input.GetKeyDown("s")) map.updateRoutes();
+        if (Input.GetKeyDown("s")) source = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);
+        if (Input.GetKeyDown("w")) dest = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);
+        if (Input.GetKeyDown("r"))
+        {
+            foreach(Vector2 v in RouteFinder.findPath(source, dest))
+            {
+                Debug.Log(v);
+            }
+        }
+        //****************************************************
         DrawingManager.Update(map);
 	}
 }

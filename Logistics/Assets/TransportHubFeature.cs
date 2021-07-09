@@ -28,9 +28,4 @@ public class TransportHubFeature : TransportFeature {
     {
         return Assets.railyardPrefab;
     }
-
-    public void updateRoutes()
-    {
-        routes = RouteFinder.getRoutes(this);
-    }
 }

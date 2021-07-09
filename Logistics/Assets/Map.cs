@@ -39,18 +39,6 @@ public class Map {
         }
     }
 
-    public void updateRoutes()
-    {
-        for(int i = 0;i < playTiles.Count; i++)
-        {
-            if (playTiles[i].getFeature(false) != null && playTiles[i].getFeature(false).isHub)
-            {
-                TransportHubFeature hub = (TransportHubFeature)playTiles[i].getFeature(false);
-                hub.updateRoutes();
-            }
-        }
-    }
-
     public Tile tileWithMouseInside()
     {
         for(int i = 0;i < playTiles.Count; i++)
