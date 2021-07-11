@@ -34,7 +34,10 @@ public class Main : MonoBehaviour {
                 Debug.Log(v);
             }
         }
+        if (Input.GetKeyDown("f")) VehicleCreator.startVehicleCreation(map);
         //****************************************************
         DrawingManager.Update(map);
+        VehicleCreator.Update();
+        VehicleManager.Update();
 	}
 }

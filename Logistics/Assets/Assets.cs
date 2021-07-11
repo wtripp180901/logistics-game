@@ -8,4 +8,5 @@ public static class Assets {
     public static float tilePrefabWidth;
     public static GameObject railOnesidePrefab;
     public static GameObject railyardPrefab;
+    public static GameObject trainPrefab;
 }

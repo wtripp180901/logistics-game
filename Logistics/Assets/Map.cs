@@ -47,4 +47,21 @@ public class Map {
         }
         return null;
     }
+
+    public TransportHubFeature[] getHubs()
+    {
+        List<TransportHubFeature> hubs = new List<TransportHubFeature>();
+        for (int i = 0;i < data.Length; i++)
+        {
+            for(int j = 0;j < data[0].Length; j++)
+            {
+                if (data[i][j] != null)
+                {
+                    Feature feature = data[i][j].getFeature(false);
+                    if (feature != null && feature.isHub) hubs.Add((TransportHubFeature)feature);
+                }
+            }
+        }
+        return hubs.ToArray();
+    }
 }

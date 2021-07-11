@@ -16,7 +16,6 @@ public class TransportHubFeature : TransportFeature {
 
     public override bool canLinkWith(FEATURES feat)
     {
-        Debug.Log("based polymorphism");
         for(int i = 0;i < allowedLinks.Length; i++)
         {
             if (allowedLinks[i] == feat) return true;

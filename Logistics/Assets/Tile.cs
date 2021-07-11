@@ -35,13 +35,16 @@ public class Tile {
 
     public void addFeature(FEATURES toAdd,bool temporary)
     {
-        _feature = FeatureFactory.build(toAdd, temporary, this);
-        if (_feature.isTransportFeature)
+        if (_feature == null)
         {
-            TransportFeature t = (TransportFeature)_feature;
-            t.link();
+            _feature = FeatureFactory.build(toAdd, temporary, this);
+            if (_feature.isTransportFeature)
+            {
+                TransportFeature t = (TransportFeature)_feature;
+                t.link();
+            }
+            renderFeature();
         }
-        renderFeature();
     }
 
     public void confirmFeature()

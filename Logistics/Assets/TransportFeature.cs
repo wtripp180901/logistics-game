@@ -32,7 +32,6 @@ public class TransportFeature : Feature
         {
             links.Add(linkTo);
             linkTo.links.Add(this);
-            Debug.Log("linked");
         }
     }
 
