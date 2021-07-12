@@ -76,7 +76,7 @@ public static class VehicleCreator {
             journies.Add(retrieveFromCache(hubs.Pop(), journies[journies.Count - 1].source));
         }
         journies.Reverse();
-        VehicleManager.addVehicle(new Vehicle(journies));
+        VehicleManager.addVehicle(new Vehicle(new LinkedList<Journey>(journies)));
         vehicleCreationMode = false;
     }
 
@@ -89,6 +89,7 @@ public static class VehicleCreator {
         throw new System.Exception("journey not cached");
     }
 
+    //Gets hubs with paths to the current hub, caching newly computed paths along the way
     private static void setAvailableHubs()
     {
         if (hubs.Count == 0)

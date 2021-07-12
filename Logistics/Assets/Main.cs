@@ -35,6 +35,14 @@ public class Main : MonoBehaviour {
             }
         }
         if (Input.GetKeyDown("f")) VehicleCreator.startVehicleCreation(map);
+        if (Input.GetMouseButtonDown(1))
+        {
+            TransportFeature feat = (TransportFeature)map.tileWithMouseInside().getFeature(false);
+            foreach(Feature f in feat.links)
+            {
+                Debug.Log(f.parent.position);
+            }
+        }
         //****************************************************
         DrawingManager.Update(map);
         VehicleCreator.Update();

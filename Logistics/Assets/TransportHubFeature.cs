@@ -6,7 +6,6 @@ public class TransportHubFeature : TransportFeature {
 
     public override bool isHub{ get {return true;} }
     public TransportHubFeature(FEATURES featureType, bool temporary, Tile parent): base(featureType, temporary, parent){ linkCapacity = 4; }
-    private Dictionary<TransportHubFeature, List<Vector2>> routes = new Dictionary<TransportHubFeature, List<Vector2>>();
     private FEATURES[] allowedLinks;
 
     public TransportHubFeature(FEATURES featureType, bool temporary, Tile parent,FEATURES[] allowedLinks) : base(featureType, temporary, parent)
