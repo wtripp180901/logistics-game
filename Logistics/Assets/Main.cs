@@ -19,11 +19,15 @@ public class Main : MonoBehaviour {
         //Debug shit**********************************
         if (Input.GetKeyDown("q"))
         {
-            DrawingManager.startDrawing(new ConnectionDrawer(map,FEATURES.RAIL));
+            DrawingManager.startDrawing(new ConnectionDrawer(map,FEATURES.ROAD));
         }
         if (Input.GetKeyDown("e"))
         {
             DrawingManager.startDrawing(new HubDrawer(map, FEATURES.RAILYARD));
+        }
+        if (Input.GetKeyDown("t"))
+        {
+            DrawingManager.startDrawing(new HubDrawer(map, FEATURES.FOOD_FACTORY));
         }
         if (Input.GetKeyDown("s")) source = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);
         if (Input.GetKeyDown("w")) dest = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);

@@ -9,10 +9,16 @@ public class Vehicle {
     private float speed = 0.1f;
 
     private LinkedListNode<Journey> currentJourneyNode;
-    private List<Vector2> currentPath {  get { return currentJourneyNode.Value.path; } }
+    private List<Vector2> currentPath { get { return currentJourneyNode.Value.path; } }
+    private TransportHubFeature currentDestination { get { return currentJourneyNode.Value.destination; } }
     private int currentPathIndex = 0;
     private Vector2 currentVectorTarget;
-    private Vector2 travelVector = new Vector2(0,0);
+    private Vector2 travelVector = new Vector2(0, 0);
+
+    private List<Item> items = new List<Item>();
+    private int itemCapacity = 2;
+    private const float loadInterval = 0.5f;
+    private float loadTimer = 0f;
 
     public Vehicle(LinkedList<Journey> routes)
     {
@@ -45,14 +51,84 @@ public class Vehicle {
 
     private void unload()
     {
-        load();
+        currentDestination.storage.startUnloadLoad();
+        if (hubCanAcceptAtLeastOneItem(currentDestination))
+        {
+            loadTimer += Time.deltaTime;
+            if (loadTimer >= loadInterval)
+            {
+                loadTimer -= loadInterval;
+                for (int i = items.Count - 1; i >= 0; i--)
+                {
+                    if (currentDestination.storage.canAcceptItem(items[i].type))
+                    {
+                        currentDestination.storage.giveItem(items[i]);
+                        Debug.Log("unloaded " + items[i].type);
+                        items.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            loadTimer = 0;
+            stage = STAGE.LOADING;
+        }
     }
 
     private void load()
     {
-        if (currentJourneyNode == routes.Last) currentJourneyNode = routes.First;
-        else currentJourneyNode = currentJourneyNode.Next;
-        stage = STAGE.TRAVEL;
+        if (canTakeAtLeastOneItemFromHub(currentDestination))
+        {
+            loadTimer += Time.deltaTime;
+            if(loadTimer >= loadInterval)
+            {
+                loadTimer -= loadInterval;
+                ITEM_TYPE[] hubItems = currentDestination.storage.takeableItems;
+                for(int i = hubItems.Length - 1;i >= 0; i--)
+                {
+                    if(consumerOnRoute(hubItems[i]))
+                    {
+                        items.Add(currentDestination.storage.takeItem(hubItems[i]));
+                        Debug.Log("loaded " + hubItems[i]);
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            currentDestination.storage.finishUnloadLoad();
+            if (currentJourneyNode == routes.Last) currentJourneyNode = routes.First;
+            else currentJourneyNode = currentJourneyNode.Next;
+            stage = STAGE.TRAVEL;
+        }
+    }
+
+    private bool hubCanAcceptAtLeastOneItem(TransportHubFeature hub)
+    {
+        if (!hub.storage.storageAvailable) return false;
+        for (int i = 0;i < items.Count; i++)
+        {
+            if (hub.storage.canAcceptItem(items[i].type)) return true;
+        }
+        return false;
+    }
+
+    private bool canTakeAtLeastOneItemFromHub(TransportHubFeature hub)
+    {
+        bool itemFromHubHasConsumer = false;
+        ITEM_TYPE[] hubItems = hub.storage.takeableItems;
+        for (int i = 0;i < hubItems.Length; i++)
+        {
+            if (consumerOnRoute(hubItems[i]))
+            {
+                itemFromHubHasConsumer = true;
+                break;
+            }
+        }
+        return items.Count < itemCapacity && !currentDestination.storage.empty && itemFromHubHasConsumer;
     }
 
     private void travel()
@@ -75,5 +151,18 @@ public class Vehicle {
                 currentPathIndex = 0;
             }
         }
+    }
+
+    private bool consumerOnRoute(ITEM_TYPE type)
+    {
+        LinkedListNode<Journey> node = currentJourneyNode.Next;
+        bool firstNodeIsShed = currentJourneyNode.Value.destination.storage.isShed;
+        while (node != null)
+        {
+            IStorage currentStorage = node.Value.destination.storage;
+            if (currentStorage.canAcceptItem(type) && !(firstNodeIsShed && currentStorage.isShed)) return true;
+            node = node.Next;
+        }
+        return false;
     }
 }

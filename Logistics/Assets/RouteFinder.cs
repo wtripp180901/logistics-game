@@ -55,6 +55,7 @@ public static class RouteFinder {
                 path.Add(currentNode.position);
                 currentNode = currentNode.parent;
             }
+            path.Add(source.parent.position);
             path.Reverse();
             return path;
         }
