@@ -29,6 +29,10 @@ public class Main : MonoBehaviour {
         {
             DrawingManager.startDrawing(new HubDrawer(map, FEATURES.FOOD_FACTORY));
         }
+        if (Input.GetKeyDown("y"))
+        {
+            DrawingManager.startDrawing(new HubDrawer(map, FEATURES.FARM));
+        }
         if (Input.GetKeyDown("s")) source = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);
         if (Input.GetKeyDown("w")) dest = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);
         if (Input.GetKeyDown("r"))
@@ -39,17 +43,10 @@ public class Main : MonoBehaviour {
             }
         }
         if (Input.GetKeyDown("f")) VehicleCreator.startVehicleCreation(map);
-        if (Input.GetMouseButtonDown(1))
-        {
-            TransportFeature feat = (TransportFeature)map.tileWithMouseInside().getFeature(false);
-            foreach(Feature f in feat.links)
-            {
-                Debug.Log(f.parent.position);
-            }
-        }
         //****************************************************
         DrawingManager.Update(map);
         VehicleCreator.Update();
         VehicleManager.Update();
+        ProductCreatorObserver.Update();
 	}
 }
