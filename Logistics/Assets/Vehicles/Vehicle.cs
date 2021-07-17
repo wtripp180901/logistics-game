@@ -28,6 +28,7 @@ public class Vehicle {
         transform = gameObject.transform;
         currentJourneyNode = this.routes.First;
         currentVectorTarget = currentJourneyNode.Value.path[0];
+        Debug.Log("Travelling " + currentJourneyNode.Value.source.parent.position + " to " + currentJourneyNode.Value.destination.parent.position);
     }
 
     private enum STAGE { LOADING, UNLOADING, TRAVEL }
@@ -101,6 +102,7 @@ public class Vehicle {
             currentDestination.storage.finishUnloadLoad();
             if (currentJourneyNode == routes.Last) currentJourneyNode = routes.First;
             else currentJourneyNode = currentJourneyNode.Next;
+            Debug.Log("Travelling " + currentJourneyNode.Value.source.parent.position + " to " + currentJourneyNode.Value.destination.parent.position);
             stage = STAGE.TRAVEL;
         }
     }

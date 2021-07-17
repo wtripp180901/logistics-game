@@ -68,16 +68,59 @@ public static class VehicleCreator {
 
     private static void createVehicle()
     {
+        VehicleManager.addVehicle(new Vehicle(new LinkedList<Journey>(finaliseRoute())));
+        vehicleCreationMode = false;
+    }
+
+    private static List<Journey> finaliseRoute()
+    {
         List<Journey> journies = new List<Journey>();
         TransportHubFeature firstDest = hubs.Pop();
         journies.Add(retrieveFromCache(hubs.Pop(), firstDest));
-        while(hubs.Count > 0)
+        while (hubs.Count > 0)
         {
             journies.Add(retrieveFromCache(hubs.Pop(), journies[journies.Count - 1].source));
         }
+        int lastJourneyIndex = journies.Count - 1;
+
         journies.Reverse();
-        VehicleManager.addVehicle(new Vehicle(new LinkedList<Journey>(journies)));
-        vehicleCreationMode = false;
+        if (journies.Count > 1 && journies[0].source == journies[lastJourneyIndex].destination)
+        {
+            //If the player has input a route which naturally gives a loop, return as is
+            foreach(Journey j in journies)
+            {
+                Debug.Log(j.source.parent.position + " " + j.destination.parent.position);
+            }
+            return journies;
+        }
+        else
+        {
+            for(int i = 1;i < lastJourneyIndex - 1; i++)
+            {
+                if(journies[lastJourneyIndex].destination == journies[i].source)
+                {
+                    //Player's route partially forms a natural loop, return to the start point from the loop point
+                    Debug.Log("Partial loop");
+                    addReverseJourniesFromIndex(i - 1, journies);
+                    return journies;
+                }
+            }
+            //If the player's route is a line with no loop, add the route in reverse to the end of journies
+            Debug.Log("Line");
+            addReverseJourniesFromIndex(lastJourneyIndex,journies);
+            return journies;
+        }
+    }
+
+    //Helper for ^
+    private static void addReverseJourniesFromIndex(int returnPoint,List<Journey> originalJournies)
+    {
+        List<Journey> newJourneys = new List<Journey>();
+        for (int i = returnPoint; i >= 0; i--)
+        {
+            newJourneys.Add(retrieveFromCache(originalJournies[i].destination, originalJournies[i].source));
+        }
+        originalJournies.AddRange(newJourneys);
     }
 
     private static Journey retrieveFromCache(TransportHubFeature source, TransportHubFeature destination)
@@ -116,7 +159,10 @@ public static class VehicleCreator {
                         {
                             hubsWithPath.Add(allHubs[i]);
                             journeyCache.Add(new Journey(currentHub, allHubs[i],path));
-                            journeyCache.Add(new Journey(allHubs[i], currentHub,path));
+                            List<Vector2> reversedPath = new List<Vector2>();
+                            reversedPath.AddRange(path);
+                            reversedPath.Reverse();
+                            journeyCache.Add(new Journey(allHubs[i], currentHub,reversedPath));
                         }
                     }
                 }
