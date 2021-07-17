@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum FEATURES { ROAD, RAIL, RAILYARD, FOOD_FACTORY,FARM, NONE }
+public enum FEATURES { ROAD, RAIL, RAILYARD, FOOD_FACTORY,FARM,MARKET, NONE }
 
 public static class FeatureFactory {
 
@@ -17,6 +17,7 @@ public static class FeatureFactory {
                 return new TransportHubFeature(featureType, temporary, parent, new FEATURES[2] { FEATURES.RAIL, FEATURES.ROAD });
             case FEATURES.FOOD_FACTORY:
             case FEATURES.FARM:
+            case FEATURES.MARKET:
                 return new TransportHubFeature(featureType, temporary, parent, new FEATURES[1] { FEATURES.ROAD });
             default: throw new System.Exception("trying to create feature with undefined type");
         }

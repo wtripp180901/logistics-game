@@ -28,7 +28,6 @@ public class Vehicle {
         transform = gameObject.transform;
         currentJourneyNode = this.routes.First;
         currentVectorTarget = currentJourneyNode.Value.path[0];
-        Debug.Log("Travelling " + currentJourneyNode.Value.source.parent.position + " to " + currentJourneyNode.Value.destination.parent.position);
     }
 
     private enum STAGE { LOADING, UNLOADING, TRAVEL }
@@ -102,7 +101,6 @@ public class Vehicle {
             currentDestination.storage.finishUnloadLoad();
             if (currentJourneyNode == routes.Last) currentJourneyNode = routes.First;
             else currentJourneyNode = currentJourneyNode.Next;
-            Debug.Log("Travelling " + currentJourneyNode.Value.source.parent.position + " to " + currentJourneyNode.Value.destination.parent.position);
             stage = STAGE.TRAVEL;
         }
     }
@@ -157,13 +155,25 @@ public class Vehicle {
 
     private bool consumerOnRoute(ITEM_TYPE type)
     {
-        LinkedListNode<Journey> node = currentJourneyNode.Next;
+        /*LinkedListNode<Journey> node = currentJourneyNode.Next;
         bool firstNodeIsShed = currentJourneyNode.Value.destination.storage.isShed;
         while (node != null)
         {
             IStorage currentStorage = node.Value.destination.storage;
             if (currentStorage.canAcceptItem(type) && !(firstNodeIsShed && currentStorage.isShed)) return true;
             node = node.Next;
+        }
+        return false;*/
+        //Rewrite ^ to go through entire journey if destination is first node
+        LinkedListNode<Journey> node = routes.First;
+        while(node != null)
+        {
+            if(node != currentJourneyNode)
+            {
+                IStorage nodeStorage = node.Value.destination.storage;
+                if (nodeStorage.canAcceptItem(type) && !(currentJourneyNode.Value.destination.storage.isShed && nodeStorage.isShed)) return true;
+                node = node.Next;
+            }
         }
         return false;
     }

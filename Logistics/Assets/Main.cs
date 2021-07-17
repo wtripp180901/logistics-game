@@ -33,6 +33,10 @@ public class Main : MonoBehaviour {
         {
             DrawingManager.startDrawing(new HubDrawer(map, FEATURES.FARM));
         }
+        if (Input.GetKeyDown("u"))
+        {
+            DrawingManager.startDrawing(new HubDrawer(map, FEATURES.MARKET));
+        }
         if (Input.GetKeyDown("s")) source = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);
         if (Input.GetKeyDown("w")) dest = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);
         if (Input.GetKeyDown("r"))
