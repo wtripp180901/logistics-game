@@ -64,9 +64,9 @@ public static class RouteFinder {
 
     private static int sortingFunction(PfNode x,PfNode y)
     {
-        if (x.f > y.f) return -1;
+        if (x.f > y.f) return 1;
         else if (x.f == y.f) return 0;
-        else return 1;
+        else return -1;
     }
 
     private static List<PfNode> computeNewNodes(PfNode computeFrom,List<PfNode> closedList,List<PfNode> openList)
