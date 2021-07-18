@@ -47,7 +47,7 @@ public class TransportFeature : Feature
                 TransportFeature transportFeature;
                 if(feat != null && feat.isTransportFeature) {
                     transportFeature = (TransportFeature)feat;
-                    if(transportFeature.canLinkWith(featureType)) adjFeats.Add(feat);
+                    if(transportFeature.canLinkWith(this)) adjFeats.Add(feat);
                 }
             }
                     
@@ -55,9 +55,10 @@ public class TransportFeature : Feature
         return adjFeats.ToArray();
     }
 
-    public virtual bool canLinkWith(FEATURES feat)
+    public virtual bool canLinkWith(TransportFeature feat)
     {
-        return feat == featureType;
+        if (feat.isHub) return feat.canLinkWith(this);
+        else return featureType == feat.featureType;
     }
 
 }

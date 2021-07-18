@@ -15,11 +15,12 @@ public class TransportHubFeature : TransportFeature {
         storage = StorageFactory.build(featureType);
     }
 
-    public override bool canLinkWith(FEATURES feat)
+    public override bool canLinkWith(TransportFeature feat)
     {
-        for(int i = 0;i < allowedLinks.Length; i++)
+        Debug.Log("poly");
+        for (int i = 0;i < allowedLinks.Length; i++)
         {
-            if (allowedLinks[i] == feat) return true;
+            if (allowedLinks[i] == feat.featureType) return true;
         }
         return false;
     }
