@@ -27,7 +27,7 @@ public class Main : MonoBehaviour {
         }
         if (Input.GetKeyDown("e"))
         {
-            DrawingManager.startDrawing(new HubDrawer(map, FEATURES.RAILYARD));
+            DrawingManager.startDrawing(new HubDrawer(map, FEATURES.FARM));
         }
         if (Input.GetKeyDown("t"))
         {
@@ -35,11 +35,15 @@ public class Main : MonoBehaviour {
         }
         if (Input.GetKeyDown("y"))
         {
-            DrawingManager.startDrawing(new HubDrawer(map, FEATURES.FARM));
+            DrawingManager.startDrawing(new HubDrawer(map, FEATURES.RAILYARD));
         }
         if (Input.GetKeyDown("u"))
         {
             DrawingManager.startDrawing(new HubDrawer(map, FEATURES.MARKET));
+        }
+        if (Input.GetKeyDown("i"))
+        {
+            DrawingManager.startDrawing(new HubDrawer(map, FEATURES.AIRPORT));
         }
         if (Input.GetKeyDown("s")) source = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);
         if (Input.GetKeyDown("w")) dest = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);
@@ -50,10 +54,11 @@ public class Main : MonoBehaviour {
                 Debug.Log(v);
             }
         }
-        if (Input.GetKeyDown("f")) VehicleCreator.startVehicleCreation(map);
+        if (Input.GetKeyDown("f")) VehicleCreatorManager.startCreation(new GroundVehicleCreator(map));
+        if (Input.GetKeyDown("g")) VehicleCreatorManager.startCreation(new PlaneVehicleCreator(map));
         //****************************************************
         DrawingManager.Update(map);
-        VehicleCreator.Update();
+        VehicleCreatorManager.Update();
         VehicleManager.Update();
         ProductCreatorObserver.Update();
 	}

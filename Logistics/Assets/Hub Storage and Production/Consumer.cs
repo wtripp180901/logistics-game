@@ -25,12 +25,10 @@ public class Consumer : IStorage {
 
     public void startUnloadLoad()
     {
-        Debug.Log("starting delivery");
         unloadInProgress = true;
     }
     public void finishUnloadLoad()
     {
-        Debug.Log("finishing delivery");
         unloadInProgress = false;
     }
 }

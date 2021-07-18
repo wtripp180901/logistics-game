@@ -60,12 +60,10 @@ public class ConsumerProducer : IStorage {
 
     public void startUnloadLoad()
     {
-        Debug.Log("starting delivery");
         unloadLoadInProgress = true;
     }
     public void finishUnloadLoad()
     {
-        Debug.Log("finishing delivery");
         unloadLoadInProgress = false;
     }
     public bool isShed { get { return false; } }

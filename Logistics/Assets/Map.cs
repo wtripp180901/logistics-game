@@ -48,7 +48,7 @@ public class Map {
         return null;
     }
 
-    public TransportHubFeature[] getHubs()
+    /*public TransportHubFeature[] getHubs()
     {
         List<TransportHubFeature> hubs = new List<TransportHubFeature>();
         for (int i = 0;i < data.Length; i++)
@@ -63,5 +63,5 @@ public class Map {
             }
         }
         return hubs.ToArray();
-    }
+    }*/
 }

@@ -47,6 +47,11 @@ public class Tile {
         }
     }
 
+    public void removeFeature()
+    {
+        if(_feature != null && _feature.isHub) HubObserver.unsubscribe((TransportHubFeature)_feature);
+    }
+
     public void confirmFeature()
     {
         _feature.temporary = false;

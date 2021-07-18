@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class VehicleCreator {
+public abstract class VehicleCreator {
 
     public enum VEHICLE_TYPES { TRAIN, PLANE }
 
-    private static bool vehicleCreationMode = false;
-    private static Map map;
-    private static Stack<TransportHubFeature> hubs = new Stack<TransportHubFeature>();
-    private static TransportHubFeature[] allHubs;
-    private static TransportHubFeature[] availableHubs;
-    private static Dictionary<sourceDest,Journey> journeyCache = new Dictionary<sourceDest, Journey>();
+    private Map map;
+    private Stack<TransportHubFeature> hubs = new Stack<TransportHubFeature>();
+    private TransportHubFeature[] allHubs;
+    private TransportHubFeature[] availableHubs;
+    private Dictionary<sourceDest,Journey> journeyCache = new Dictionary<sourceDest, Journey>();
 
     private struct sourceDest : System.IEquatable<sourceDest>
     {
@@ -30,33 +29,19 @@ public static class VehicleCreator {
     }
 
 
-    public static void startVehicleCreation(Map _map)
+    public VehicleCreator(Map map)
     {
-        vehicleCreationMode = true;
-        map = _map;
-        allHubs = map.getHubs();
+        this.map = map;
+        allHubs = getAllRelevantHubs();
         availableHubs = allHubs;
         hubs.Clear();
         journeyCache.Clear();
     }
 
-    public static void Update()
-    {
-        if (vehicleCreationMode)
-        {
-            if(InputAdapter.clickInput == INPUT.UP)
-            {
-                routeCreation();
-            }
-            if (Input.GetKeyDown("z"))
-            {
-                createVehicle();
-            }
-        }
-    }
+    protected abstract TransportHubFeature[] getAllRelevantHubs();
 
-    //Helper
-    private static void routeCreation()
+    //Pushes and pops stops on journey to hubs
+    public void routeCreation()
     {
         Tile currentTile = map.tileWithMouseInside();
         if (currentTile != null)
@@ -82,13 +67,12 @@ public static class VehicleCreator {
         }
     }
 
-    private static void createVehicle()
+    public void createVehicle()
     {
         VehicleManager.addVehicle(new Vehicle(new LinkedList<Journey>(finaliseRoute())));
-        vehicleCreationMode = false;
     }
 
-    private static List<Journey> finaliseRoute()
+    private List<Journey> finaliseRoute()
     {
         List<Journey> journies = new List<Journey>();
         TransportHubFeature firstDest = hubs.Pop();
@@ -129,7 +113,7 @@ public static class VehicleCreator {
     }
 
     //Helper for ^
-    private static void addReverseJourniesFromIndex(int returnPoint,List<Journey> originalJournies)
+    private void addReverseJourniesFromIndex(int returnPoint,List<Journey> originalJournies)
     {
         List<Journey> newJourneys = new List<Journey>();
         for (int i = returnPoint; i >= 0; i--)
@@ -147,7 +131,7 @@ public static class VehicleCreator {
         }
         throw new System.Exception("journey not cached");
     }*/
-    private static Journey retrieveFromCache(TransportHubFeature source, TransportHubFeature destination)
+    private Journey retrieveFromCache(TransportHubFeature source, TransportHubFeature destination)
     {
         Journey j;
         if (journeyCache.TryGetValue(new sourceDest(source, destination), out j))
@@ -158,7 +142,7 @@ public static class VehicleCreator {
     }
 
     //Gets hubs with paths to the current hub, caching newly computed paths along the way as well as the journey in reverse
-    private static void setAvailableHubs()
+    private void setAvailableHubs()
     {
         if (hubs.Count == 0)
         {
@@ -179,7 +163,7 @@ public static class VehicleCreator {
                     }
                     else
                     {
-                        List<Vector2> path = RouteFinder.findPath(currentHub, allHubs[i]);
+                        List<Vector2> path = getPathOrNull(currentHub, allHubs[i]);
                         if(path != null)
                         {
                             hubsWithPath.Add(allHubs[i]);
@@ -195,6 +179,8 @@ public static class VehicleCreator {
             availableHubs = hubsWithPath.ToArray();
         }
     }
+
+    protected abstract List<Vector2> getPathOrNull(TransportHubFeature source, TransportHubFeature destination);
 
     /*private static bool journeyCached(TransportHubFeature source,TransportHubFeature destination)
     {

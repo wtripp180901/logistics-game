@@ -107,7 +107,11 @@ public class Vehicle {
 
     private bool hubCanAcceptAtLeastOneItem(TransportHubFeature hub)
     {
-        if (!hub.storage.storageAvailable) return false;
+        if (!hub.storage.storageAvailable)
+        {
+            Debug.Log("here");
+            return false;
+        }
         for (int i = 0;i < items.Count; i++)
         {
             if (hub.storage.canAcceptItem(items[i].type)) return true;
@@ -171,9 +175,9 @@ public class Vehicle {
             if(node != currentJourneyNode)
             {
                 IStorage nodeStorage = node.Value.destination.storage;
-                if (nodeStorage.canAcceptItem(type) && !(currentJourneyNode.Value.destination.storage.isShed && nodeStorage.isShed)) return true;
-                node = node.Next;
+                if (nodeStorage.canAcceptItem(type) && (!(currentDestination.storage.isShed && nodeStorage.isShed) || (currentDestination.isPort && node.Value.destination.isPort))) return true;
             }
+            node = node.Next;
         }
         return false;
     }

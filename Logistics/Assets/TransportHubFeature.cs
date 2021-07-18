@@ -8,16 +8,17 @@ public class TransportHubFeature : TransportFeature {
     public TransportHubFeature(FEATURES featureType, bool temporary, Tile parent): base(featureType, temporary, parent){ linkCapacity = 4; }
     private FEATURES[] allowedLinks;
     public readonly IStorage storage;
+    public bool isPort { get { return featureType == FEATURES.AIRPORT || featureType == FEATURES.SEAPORT; } }
 
-    public TransportHubFeature(FEATURES featureType, bool temporary, Tile parent,FEATURES[] allowedLinks) : base(featureType, temporary, parent)
+    public TransportHubFeature(FEATURES featureType, bool temporary, Tile parent,FEATURES[] allowedLinks,IStorage storage) : base(featureType, temporary, parent)
     {
         this.allowedLinks = allowedLinks;
-        storage = StorageFactory.build(featureType);
+        this.storage = storage;
+        HubObserver.subscribe(this);
     }
 
     public override bool canLinkWith(TransportFeature feat)
     {
-        Debug.Log("poly");
         for (int i = 0;i < allowedLinks.Length; i++)
         {
             if (allowedLinks[i] == feat.featureType) return true;

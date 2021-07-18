@@ -29,8 +29,8 @@ public class Producer : IStorage {
         }
     }
 
-    public void startUnloadLoad() { Debug.Log("starting delivery"); }
-    public void finishUnloadLoad() { Debug.Log("finishing delivery"); }
+    public void startUnloadLoad() {  }
+    public void finishUnloadLoad() {  }
 
     public bool canProduce { get { return items.Count < productionLimit; } }
     public bool isShed { get { return false; } }
