@@ -21,6 +21,10 @@ public class Main : MonoBehaviour {
         {
             DrawingManager.startDrawing(new ConnectionDrawer(map,FEATURES.ROAD));
         }
+        if (Input.GetKeyDown("p"))
+        {
+            DrawingManager.startDrawing(new ConnectionDrawer(map, FEATURES.RAIL));
+        }
         if (Input.GetKeyDown("e"))
         {
             DrawingManager.startDrawing(new HubDrawer(map, FEATURES.RAILYARD));

@@ -11,7 +11,23 @@ public static class VehicleCreator {
     private static Stack<TransportHubFeature> hubs = new Stack<TransportHubFeature>();
     private static TransportHubFeature[] allHubs;
     private static TransportHubFeature[] availableHubs;
-    private static List<Journey> journeyCache = new List<Journey>();
+    private static Dictionary<sourceDest,Journey> journeyCache = new Dictionary<sourceDest, Journey>();
+
+    private struct sourceDest : System.IEquatable<sourceDest>
+    {
+        TransportHubFeature source;
+        TransportHubFeature destination;
+        public sourceDest(TransportHubFeature source,TransportHubFeature destination)
+        {
+            this.source = source;
+            this.destination = destination;
+        }
+
+        public bool Equals(sourceDest s)
+        {
+            return source == s.source && destination == s.destination;
+        }
+    }
 
 
     public static void startVehicleCreation(Map _map)
@@ -123,16 +139,25 @@ public static class VehicleCreator {
         originalJournies.AddRange(newJourneys);
     }
 
-    private static Journey retrieveFromCache(TransportHubFeature source, TransportHubFeature destination)
+    /*private static Journey retrieveFromCache(TransportHubFeature source, TransportHubFeature destination)
     {
         for(int i = 0;i < journeyCache.Count; i++)
         {
             if (journeyCache[i].source == source && journeyCache[i].destination == destination) return journeyCache[i];
         }
         throw new System.Exception("journey not cached");
+    }*/
+    private static Journey retrieveFromCache(TransportHubFeature source, TransportHubFeature destination)
+    {
+        Journey j;
+        if (journeyCache.TryGetValue(new sourceDest(source, destination), out j))
+        {
+            return j;
+        }
+        else throw new System.Exception("Journey not in cache");
     }
 
-    //Gets hubs with paths to the current hub, caching newly computed paths along the way
+    //Gets hubs with paths to the current hub, caching newly computed paths along the way as well as the journey in reverse
     private static void setAvailableHubs()
     {
         if (hubs.Count == 0)
@@ -147,7 +172,7 @@ public static class VehicleCreator {
             {
                 if(allHubs[i] != currentHub)
                 {
-                    bool cached = journeyCached(currentHub, allHubs[i]);
+                    bool cached = journeyCache.ContainsKey(new sourceDest(currentHub, allHubs[i]));
                     if (cached)
                     {
                         hubsWithPath.Add(allHubs[i]);
@@ -158,11 +183,11 @@ public static class VehicleCreator {
                         if(path != null)
                         {
                             hubsWithPath.Add(allHubs[i]);
-                            journeyCache.Add(new Journey(currentHub, allHubs[i],path));
+                            journeyCache.Add(new sourceDest(currentHub,allHubs[i]),new Journey(currentHub, allHubs[i],path));
                             List<Vector2> reversedPath = new List<Vector2>();
                             reversedPath.AddRange(path);
                             reversedPath.Reverse();
-                            journeyCache.Add(new Journey(allHubs[i], currentHub,reversedPath));
+                            journeyCache.Add(new sourceDest(allHubs[i],currentHub),new Journey(allHubs[i], currentHub,reversedPath));
                         }
                     }
                 }
@@ -171,7 +196,7 @@ public static class VehicleCreator {
         }
     }
 
-    private static bool journeyCached(TransportHubFeature source,TransportHubFeature destination)
+    /*private static bool journeyCached(TransportHubFeature source,TransportHubFeature destination)
     {
         for (int i = 0; i < journeyCache.Count; i++)
         {
@@ -179,5 +204,5 @@ public static class VehicleCreator {
                 (journeyCache[i].source == destination && journeyCache[i].destination == source)) return true;
         }
         return false;
-    }
+    }*/
 }
