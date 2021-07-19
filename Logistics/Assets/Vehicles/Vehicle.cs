@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum VEHICLE { VAN, TRAIN, PLANE}
+
 public class Vehicle {
     private LinkedList<Journey> routes;
     public GameObject gameObject;
@@ -51,7 +53,7 @@ public class Vehicle {
 
     private void unload()
     {
-        if (hubCanAcceptAtLeastOneItem(currentDestination))
+        if (currentJourneyNode.Value.playerSpecified && hubCanAcceptAtLeastOneItem(currentDestination))
         {
             loadTimer += Time.deltaTime;
             if (loadTimer >= loadInterval)
@@ -78,7 +80,7 @@ public class Vehicle {
 
     private void load()
     {
-        if (canTakeAtLeastOneItemFromHub(currentDestination))
+        if (currentJourneyNode.Value.playerSpecified && canTakeAtLeastOneItemFromHub(currentDestination))
         {
             loadTimer += Time.deltaTime;
             if(loadTimer >= loadInterval)

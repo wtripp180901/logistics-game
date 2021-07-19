@@ -118,8 +118,13 @@ public abstract class VehicleCreator {
         List<Journey> newJourneys = new List<Journey>();
         for (int i = returnPoint; i >= 0; i--)
         {
-            newJourneys.Add(retrieveFromCache(originalJournies[i].destination, originalJournies[i].source));
+            Journey j = retrieveFromCache(originalJournies[i].destination, originalJournies[i].source);
+            j.playerSpecified = false;
+            newJourneys.Add(j);
         }
+        Journey lastJourney = newJourneys[newJourneys.Count - 1];
+        lastJourney.playerSpecified = true;
+        newJourneys[newJourneys.Count - 1] = lastJourney;
         originalJournies.AddRange(newJourneys);
     }
 

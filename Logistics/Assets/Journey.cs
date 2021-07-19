@@ -8,6 +8,7 @@ public struct Journey {
     public TransportHubFeature destination;
     public readonly List<Vector2> path;
     public readonly bool valid;
+    public bool playerSpecified;
 
     public Journey(TransportHubFeature source,TransportHubFeature destination)
     {
@@ -15,6 +16,7 @@ public struct Journey {
         this.destination = destination;
         path = RouteFinder.findPath(source,destination);
         valid = path != null;
+        playerSpecified = true;
     }
     public Journey(TransportHubFeature source, TransportHubFeature destination,List<Vector2> path)
     {
@@ -22,5 +24,6 @@ public struct Journey {
         this.destination = destination;
         this.path = path;
         valid = path != null;
+        playerSpecified = true;
     }
 }
