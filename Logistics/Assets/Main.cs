@@ -8,6 +8,7 @@ public class Main : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        UIStateManager.changeState(UI_STATE.NEUTRAL);
         map = new Map(new MapGenerator(2, 900, 10, 10));
     }
 

@@ -9,4 +9,7 @@ public static class Assets {
     public static GameObject railOnesidePrefab;
     public static GameObject railyardPrefab;
     public static GameObject trainPrefab;
+    public static GameObject openVehicleButtonPrefab;
+    public static GameObject openTransportButtonPrefab;
+    public static Transform canvas;
 }
