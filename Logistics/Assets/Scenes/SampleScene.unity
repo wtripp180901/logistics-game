@@ -289,7 +289,11 @@ MonoBehaviour:
     type: 2}
   _openVehicleButtonPrefab: {fileID: 1456998896454880, guid: b51e067b84572a947b23f2415cf65241,
     type: 2}
+  _vehicleBarPrefab: {fileID: 1805671636565668, guid: e41cc880e45d4204e9fccd765b9d117b,
+    type: 2}
   _canvas: {fileID: 596821538}
+  _transportBarPrefab: {fileID: 1696423924964582, guid: 0ba26f99c7b5fd146827f0cd35daeaed,
+    type: 2}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0

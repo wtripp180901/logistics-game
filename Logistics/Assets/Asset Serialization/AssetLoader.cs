@@ -14,6 +14,8 @@ public class AssetLoader : MonoBehaviour {
         Assets.openTransportButtonPrefab = _openTransportButtonPrefab;
         Assets.openVehicleButtonPrefab = _openVehicleButtonPrefab;
         Assets.canvas = _canvas;
+        Assets.vehicleBarPrefab = _vehicleBarPrefab;
+        Assets.transportBarPrefab = _transportBarPrefab;
     }
 
     public GameObject _allsidesPrefab;
@@ -22,5 +24,7 @@ public class AssetLoader : MonoBehaviour {
     public GameObject _trainPrefab;
     public GameObject _openTransportButtonPrefab;
     public GameObject _openVehicleButtonPrefab;
+    public GameObject _vehicleBarPrefab;
     public Transform _canvas;
+    public GameObject _transportBarPrefab;
 }

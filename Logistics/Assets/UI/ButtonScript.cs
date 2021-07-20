@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BUTTON_FUNCTION { OPEN_TRANSPORT_MENU, OPEN_VEHICLE_MENU}
+public enum BUTTON_FUNCTION { OPEN_TRANSPORT_MENU, OPEN_VEHICLE_MENU }
 
-public class ButtonScript : MonoBehaviour {
+public abstract class ButtonScript : MonoBehaviour {
 
-    [SerializeField]
-    private BUTTON_FUNCTION buttonFunction;
     private Button button;
 
 	// Use this for initialization
@@ -16,9 +14,6 @@ public class ButtonScript : MonoBehaviour {
         button = GetComponent<Button>();
         button.onClick.AddListener(buttonAction);
 	}
-	
-	void buttonAction()
-    {
-        ButtonReciever.recieveButtonClick(buttonFunction);
-    }
+
+    protected abstract void buttonAction();
 }

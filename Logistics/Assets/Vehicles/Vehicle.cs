@@ -8,7 +8,7 @@ public class Vehicle {
     private LinkedList<Journey> routes;
     public GameObject gameObject;
     public Transform transform;
-    private float speed = 0.1f;
+    private float speed = 1f;
 
     private LinkedListNode<Journey> currentJourneyNode;
     private List<Vector2> currentPath { get { return currentJourneyNode.Value.path; } }
@@ -111,7 +111,6 @@ public class Vehicle {
     {
         if (!hub.storage.storageAvailable)
         {
-            Debug.Log("here");
             return false;
         }
         for (int i = 0;i < items.Count; i++)
@@ -140,7 +139,7 @@ public class Vehicle {
     {
         if ((currentVectorTarget - (Vector2)transform.position).magnitude > 0.05f)
         {
-            transform.position += (Vector3)travelVector * speed;
+            transform.position += (Vector3)travelVector * Time.deltaTime;
         }
         else
         {

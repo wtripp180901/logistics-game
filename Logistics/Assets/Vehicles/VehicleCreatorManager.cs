@@ -27,6 +27,7 @@ public static class VehicleCreatorManager {
                 creator.createVehicle();
                 vehicleCreationMode = false;
                 creator = null;
+                ModelReciever.finishCreationAction();
             }
         }
     }

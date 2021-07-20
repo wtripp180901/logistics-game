@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum UI_STATE { BLANK, NEUTRAL, TRANSPORT_MENU}
+public enum UI_STATE { BLANK, NEUTRAL, VEHICLE_MENU,TRANSPORT_MENU}
 
 public static class UIStateManager {
 
@@ -11,7 +11,10 @@ public static class UIStateManager {
 
     private static Dictionary<UI_STATE, GameObject[]> objectsToRenderDictionary = new Dictionary<UI_STATE, GameObject[]>()
     {
-        { UI_STATE.NEUTRAL, new GameObject[] {Assets.openTransportButtonPrefab,Assets.openVehicleButtonPrefab} }
+        { UI_STATE.NEUTRAL, new GameObject[] {Assets.openTransportButtonPrefab,Assets.openVehicleButtonPrefab} },
+        { UI_STATE.BLANK, new GameObject[0] },
+        { UI_STATE.VEHICLE_MENU, new GameObject[] {Assets.vehicleBarPrefab} },
+        { UI_STATE.TRANSPORT_MENU, new GameObject[] {Assets.transportBarPrefab} }
     };
 
 	public static void changeState(UI_STATE state)
@@ -20,7 +23,7 @@ public static class UIStateManager {
         _state = state;
         GameObject[] toCreate;
         if (objectsToRenderDictionary.TryGetValue(_state, out toCreate)) addAndRenderObjects(toCreate);
-        else throw new System.Exception("State not implemented in dictionary");
+        else throw new System.Exception("State not implemented in dictionary "+state);
     }
 
     private static void addAndRenderObjects(GameObject[] toCreate)

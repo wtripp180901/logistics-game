@@ -10,6 +10,8 @@ public class Main : MonoBehaviour {
     void Start () {
         UIStateManager.changeState(UI_STATE.NEUTRAL);
         map = new Map(new MapGenerator(2, 900, 10, 10));
+        VehicleCreatorFactory.initialise(map);
+        DrawerFactory.initialise(map);
     }
 
     TransportHubFeature source;
