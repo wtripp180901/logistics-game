@@ -14,4 +14,6 @@ public static class Assets {
     public static Transform canvas;
     public static GameObject vehicleBarPrefab;
     public static GameObject transportBarPrefab;
+    public static GameObject confirmButtonPrefab;
+    public static GameObject cancelButtonPrefab;
 }

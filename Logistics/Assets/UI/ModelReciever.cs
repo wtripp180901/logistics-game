@@ -8,4 +8,10 @@ public static class ModelReciever {
     {
         UIStateManager.changeState(UI_STATE.NEUTRAL);
     }
+
+    public static void exitCurrentState()
+    {
+        
+        throw new System.Exception("not implemented");
+    }
 }

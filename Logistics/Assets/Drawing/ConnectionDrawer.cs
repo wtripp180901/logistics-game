@@ -46,10 +46,11 @@ public class ConnectionDrawer : Drawer {
 
     protected override void finishDrawing()
     {
-        for (int i = 0; i < line.Count; i++)
+        /*for (int i = 0; i < line.Count; i++)
         {
             line[i].confirmFeature();
-        }
+        }*/
+        ConnectionConfirmer.requestConfirmation(line);
         toDraw = FEATURES.NONE;
         startedLine = false;
         line.Clear();

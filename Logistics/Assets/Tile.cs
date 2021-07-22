@@ -50,6 +50,8 @@ public class Tile {
     public void removeFeature()
     {
         if(_feature != null && _feature.isHub) HubObserver.unsubscribe((TransportHubFeature)_feature);
+        //Unlink
+        //Destroy gameobject
     }
 
     public void confirmFeature()
