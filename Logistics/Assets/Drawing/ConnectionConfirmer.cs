@@ -6,19 +6,12 @@ public static class ConnectionConfirmer {
 
     private static Tile[] toConfirm;
 
-    private static GameObject[] buttons;
-
 	public static void requestConfirmation(List<Tile> _toConfirm)
     {
         toConfirm = _toConfirm.ToArray();
         GameObject baseGO = toConfirm[toConfirm.Length - 1].gameObject;
         Vector2 basePos = baseGO.transform.position;
-        float offset = baseGO.GetComponent<SpriteRenderer>().bounds.extents.x;
-        buttons = new GameObject[2]
-        {
-            Object.Instantiate(Assets.confirmButtonPrefab, new Vector3(basePos.x - offset,basePos.y - offset,-0.3f),Quaternion.identity),
-            Object.Instantiate(Assets.cancelButtonPrefab, new Vector3(basePos.x + offset,basePos.y - offset,-0.3f),Quaternion.identity)
-        };
+        ModelReciever.createConfirmationMenu(basePos);
     }
 
     public static void confirm()
@@ -43,9 +36,7 @@ public static class ConnectionConfirmer {
 
     private static void finish()
     {
-        Object.Destroy(buttons[0]);
-        Object.Destroy(buttons[1]);
-        buttons = null;
+        ModelReciever.finishCreationAction();
         toConfirm = null;
     }
 }

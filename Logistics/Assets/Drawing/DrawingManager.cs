@@ -31,6 +31,5 @@ public static class DrawingManager {
     {
         toDraw = null;
         drawingMode = false;
-        ModelReciever.finishCreationAction();
     }
 }

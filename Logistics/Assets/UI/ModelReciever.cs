@@ -12,10 +12,17 @@ public static class ModelReciever {
 
     public static void exitCurrentState()
     {
-        throw new System.Exception("not implemented");
+        Debug.Log("exit");
     }
 
-    
+    public static void createConfirmationMenu(Vector2 position)
+    {
+        float offset = Assets.tilePrefabWidth / 2;
+        WorldUIStateManager.createWorldUI(Assets.confirmButtonPrefab, new Vector2(position.x - offset, position.y - offset));
+        WorldUIStateManager.createWorldUI(Assets.cancelButtonPrefab, new Vector2(position.x + offset, position.y - offset));
+    }
+
+    public static void clearWorldUI() { WorldUIStateManager.clear(); }
 
     public static void createStopNumberUI(GameObject asset, TransportHubFeature hub, string text)
     {

@@ -41,5 +41,6 @@ public static class UIStateManager {
             Object.Destroy(currentUI[i]);
             currentUI.RemoveAt(i);
         }
+        WorldUIStateManager.clear();
     }
 }

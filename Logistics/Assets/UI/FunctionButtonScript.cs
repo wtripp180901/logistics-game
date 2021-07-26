@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenMenuButtonScript : ButtonScript {
+public class FunctionButtonScript : ButtonScript {
 
     [SerializeField]
     private BUTTON_FUNCTION buttonFunction;

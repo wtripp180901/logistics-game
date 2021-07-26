@@ -55,11 +55,22 @@ public static class WorldUIStateManager {
         }
     }
 
-    private static GameObject createWorldUI(GameObject asset, Vector2 position)
+    public static GameObject createWorldUI(GameObject asset, Vector2 position)
     {
         GameObject worldUI = Object.Instantiate(asset, Assets.canvas);
         worldUI.GetComponent<WorldUIScript>().worldPosition = new Vector3(position.x, position.y, -0.3f);
         currentWorldUI.Add(worldUI);
         return worldUI;
+    }
+
+    public static void clear()
+    {
+        hubTexts.Clear();
+        hubGOs.Clear();
+        for(int i = 0;i < currentWorldUI.Count; i++)
+        {
+            Object.Destroy(currentWorldUI[i]);
+        }
+        currentWorldUI.Clear();
     }
 }

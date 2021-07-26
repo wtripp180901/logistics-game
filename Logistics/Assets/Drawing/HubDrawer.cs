@@ -27,5 +27,6 @@ public class HubDrawer : Drawer {
             currentTile.addFeature(toDraw, false);
             currentTile.setMouseOverBehaviour(false);
         }
+        ModelReciever.finishCreationAction();
     }
 }
