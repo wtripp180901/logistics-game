@@ -16,4 +16,5 @@ public static class Assets {
     public static GameObject transportBarPrefab;
     public static GameObject confirmButtonPrefab;
     public static GameObject cancelButtonPrefab;
+    public static GameObject stopNumberPrefab;
 }

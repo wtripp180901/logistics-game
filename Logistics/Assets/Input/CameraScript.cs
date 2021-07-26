@@ -16,6 +16,6 @@ public class CameraScript : MonoBehaviour {
     {
         cam.orthographicSize -= InputAdapter.scrollInput;
         Vector2Int screenDrag = InputAdapter.screenDrag;
-        transform.position += new Vector3(screenDrag.x,screenDrag.y,0) * cameraSpeed * Time.deltaTime;
+        transform.position += new Vector3(screenDrag.x,screenDrag.y,0) * cameraSpeed * cam.orthographicSize * Time.deltaTime;
     }
 }

@@ -8,11 +8,19 @@ public class Map {
     private List<Tile> playTiles = new List<Tile>();
     private CoordinateValidator validator;
 
-	public Map(IMapDataGenerator dataGenerator)
+    public Map(IMapDataGenerator dataGenerator)
     {
         data = dataGenerator.generateMapData();
         validator = new CoordinateValidator(data[0].Length, data.Length,0);
         buildMap();
+
+        //Creating world space UI renderer
+        /*float mapWidth = data[0].Length * Assets.tilePrefabWidth;
+        float mapHeight = data.Length * Assets.tilePrefabWidth;
+        RectTransform rect = Assets.worldCanvas.GetComponent<RectTransform>();
+        rect.position = new Vector2(mapWidth / 2, mapHeight / 2);
+        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, mapWidth);
+        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, mapHeight);*/
     }
 
     public Tile getTile(int x,int y) { return data[y][x]; }

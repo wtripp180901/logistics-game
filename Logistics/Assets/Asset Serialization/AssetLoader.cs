@@ -18,6 +18,7 @@ public class AssetLoader : MonoBehaviour {
         Assets.transportBarPrefab = _transportBarPrefab;
         Assets.confirmButtonPrefab = _confirmButtonPrefab;
         Assets.cancelButtonPrefab = _cancelButtonPrefab;
+        Assets.stopNumberPrefab = _stopNumberPrefab;
     }
 
     public GameObject _allsidesPrefab;
@@ -31,4 +32,5 @@ public class AssetLoader : MonoBehaviour {
     public GameObject _transportBarPrefab;
     public GameObject _confirmButtonPrefab;
     public GameObject _cancelButtonPrefab;
+    public GameObject _stopNumberPrefab;
 }

@@ -298,6 +298,8 @@ MonoBehaviour:
     type: 2}
   _cancelButtonPrefab: {fileID: 1437537462985392, guid: fd695bb85f8176d4fb66c147eea4558a,
     type: 2}
+  _stopNumberPrefab: {fileID: 1033576217392162, guid: baf89332d0617c04dbc385f1e5db746b,
+    type: 2}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
