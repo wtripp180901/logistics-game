@@ -50,7 +50,7 @@ public class ConnectionDrawer : Drawer {
         {
             line[i].confirmFeature();
         }*/
-        ConnectionConfirmer.requestConfirmation(line);
+        ConfirmationManager.requestConfirmation(line);
         toDraw = FEATURES.NONE;
         startedLine = false;
         line.Clear();

@@ -63,6 +63,18 @@ public static class WorldUIStateManager {
         return worldUI;
     }
 
+    public static void clearConfirmationButtons()
+    {
+        for(int i = currentWorldUI.Count - 1;i >= 0;i--)
+        {
+            if (currentWorldUI[i].tag == "confirmationButton")
+            {
+                Object.Destroy(currentWorldUI[i]);
+                currentWorldUI.RemoveAt(i);
+            }
+        }
+    }
+
     public static void clear()
     {
         hubTexts.Clear();

@@ -12,6 +12,7 @@ public abstract class VehicleCreator {
     private TransportHubFeature[] availableHubs;
     private Dictionary<sourceDest,Journey> journeyCache = new Dictionary<sourceDest, Journey>();
     private int stopCount = 1;
+    protected abstract VEHICLE vehicleType { get; }
 
     private struct sourceDest : System.IEquatable<sourceDest>
     {
@@ -56,16 +57,16 @@ public abstract class VehicleCreator {
                     //Double clicking current hub removes it
                     hubs.Pop();
                     ModelReciever.removeStopNumberUI(hub);
-                    setAvailableHubs();
                     stopCount -= 1;
                 }
                 else if (System.Array.Exists(availableHubs, x => x == hub))
                 {
                     ModelReciever.createStopNumberUI(Assets.stopNumberPrefab, hub,stopCount.ToString());
                     hubs.Push(hub);
-                    setAvailableHubs();
                     stopCount += 1;
                 }
+                setAvailableHubs();
+                ConfirmationManager.requestConfirmation(hubs.Peek().parent.position, vehicleType);
             }
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BUTTON_FUNCTION { OPEN_TRANSPORT_MENU, OPEN_VEHICLE_MENU,CANCEL_DRAWING,CONFIRM_DRAWING }
+public enum BUTTON_FUNCTION { OPEN_TRANSPORT_MENU, OPEN_VEHICLE_MENU,CANCEL,CONFIRM }
 
 public static class ButtonReciever {
 
@@ -16,12 +16,13 @@ public static class ButtonReciever {
     {
         switch (function)
         {
-            case BUTTON_FUNCTION.CONFIRM_DRAWING:
-                ConnectionConfirmer.confirm();
+            case BUTTON_FUNCTION.CONFIRM:
+                ConfirmationManager.confirm();
                 UIStateManager.changeState(UI_STATE.NEUTRAL);
                 break;
-            case BUTTON_FUNCTION.CANCEL_DRAWING:
-                ConnectionConfirmer.cancel();
+            case BUTTON_FUNCTION.CANCEL:
+                ConfirmationManager.cancel();
+                WorldUIStateManager.clear();
                 break;
             default:
                 UI_STATE nextState;

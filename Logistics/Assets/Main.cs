@@ -64,5 +64,10 @@ public class Main : MonoBehaviour {
         VehicleCreatorManager.Update();
         VehicleManager.Update();
         ProductCreatorObserver.Update();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ModelReciever.exitCurrentState();
+        }
 	}
 }

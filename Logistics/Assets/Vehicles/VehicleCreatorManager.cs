@@ -22,13 +22,14 @@ public static class VehicleCreatorManager {
             {
                 creator.routeCreation();
             }
-            if (Input.GetKeyDown("z"))
-            {
-                creator.createVehicle();
-                vehicleCreationMode = false;
-                creator = null;
-                ModelReciever.finishCreationAction();
-            }
         }
+    }
+
+    public static void finish()
+    {
+        creator.createVehicle();
+        vehicleCreationMode = false;
+        creator = null;
+        //ModelReciever.finishCreationAction();
     }
 }

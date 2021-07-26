@@ -2,28 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ConnectionConfirmer {
+public class ConnectionConfirmer : Confirmer {
 
-    private static Tile[] toConfirm;
+    private Tile[] toConfirm;
 
-	public static void requestConfirmation(List<Tile> _toConfirm)
+    public ConnectionConfirmer(List<Tile> toConfirm)
     {
-        toConfirm = _toConfirm.ToArray();
+        this.toConfirm = toConfirm.ToArray();
+    }
+
+
+    public override void createUI()
+    {
         GameObject baseGO = toConfirm[toConfirm.Length - 1].gameObject;
         Vector2 basePos = baseGO.transform.position;
         ModelReciever.createConfirmationMenu(basePos);
     }
 
-    public static void confirm()
+    public override void confirm()
     {
         for(int i = 0;i < toConfirm.Length; i++)
         {
             toConfirm[i].confirmFeature();
         }
-        finish();
     }
 
-    public static void cancel()
+    public override void cancel()
     {
         FEATURES toRedraw = toConfirm[0].getFeature(true).featureType;
         for (int i = 0; i < toConfirm.Length; i++)
@@ -31,12 +35,5 @@ public static class ConnectionConfirmer {
             toConfirm[i].removeFeature();
         }
         DrawingManager.startDrawing(DrawerFactory.build(toRedraw));
-        finish();
-    }
-
-    private static void finish()
-    {
-        ModelReciever.finishCreationAction();
-        toConfirm = null;
     }
 }

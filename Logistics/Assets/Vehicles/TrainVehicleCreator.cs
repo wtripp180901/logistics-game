@@ -6,6 +6,14 @@ public class TrainVehicleCreator : VehicleCreator {
 
     public TrainVehicleCreator(Map map) : base(map) { }
 
+    protected override VEHICLE vehicleType
+    {
+        get
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
     protected override TransportHubFeature[] getAllRelevantHubs()
     {
         return HubObserver.getRailyards;
