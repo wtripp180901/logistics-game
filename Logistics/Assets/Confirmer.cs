@@ -7,4 +7,5 @@ public abstract class Confirmer{
     public abstract void createUI();
     public abstract void confirm();
     public abstract void cancel();
+    public abstract void reset();
 }

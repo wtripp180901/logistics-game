@@ -294,9 +294,9 @@ MonoBehaviour:
   _canvas: {fileID: 596821538}
   _transportBarPrefab: {fileID: 1696423924964582, guid: 0ba26f99c7b5fd146827f0cd35daeaed,
     type: 2}
-  _confirmButtonPrefab: {fileID: 1059342449746412, guid: 6eab19de44137b2468efe54c46407439,
+  _confirmButtonPrefab: {fileID: 1462461865565406, guid: 36fda6096eefc814cac97b3ed7d64d06,
     type: 2}
-  _cancelButtonPrefab: {fileID: 1437537462985392, guid: fd695bb85f8176d4fb66c147eea4558a,
+  _cancelButtonPrefab: {fileID: 1754408185255076, guid: b14784cab6c2fe1419e0b93ff624b08d,
     type: 2}
   _stopNumberPrefab: {fileID: 1033576217392162, guid: baf89332d0617c04dbc385f1e5db746b,
     type: 2}

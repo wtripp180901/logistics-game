@@ -30,6 +30,12 @@ public static class ConfirmationManager {
         finish();
     }
 
+    public static void reset()
+    {
+        confirmer.reset();
+        finish();
+    }
+
     private static void finish()
     {
         //ModelReciever.finishCreationAction();

@@ -23,6 +23,7 @@ public abstract class Drawer {
         }
     }
 
+    public abstract void reset();
     protected abstract void concreteUpdate();
     protected abstract void finishDrawing();
 }

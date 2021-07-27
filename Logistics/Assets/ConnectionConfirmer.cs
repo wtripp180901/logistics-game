@@ -36,4 +36,12 @@ public class ConnectionConfirmer : Confirmer {
         }
         DrawingManager.startDrawing(DrawerFactory.build(toRedraw));
     }
+
+    public override void reset()
+    {
+        for(int i = 0;i < toConfirm.Length; i++)
+        {
+            toConfirm[i].removeFeature();
+        }
+    }
 }

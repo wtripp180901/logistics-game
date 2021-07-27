@@ -12,7 +12,10 @@ public static class ModelReciever {
 
     public static void exitCurrentState()
     {
-        Debug.Log("exit");
+        DrawingManager.reset();
+        VehicleCreatorManager.reset();
+        ConfirmationManager.reset();
+        UIStateManager.exitState();
     }
 
     public static void createConfirmationMenu(Vector2 position)

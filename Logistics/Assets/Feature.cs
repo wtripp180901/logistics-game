@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Feature {
 
-    private GameObject gameObject;
+    public GameObject gameObject;
     public bool temporary;
     public readonly Tile parent;
     private FEATURES _featureType; public FEATURES featureType { get { return _featureType; } }

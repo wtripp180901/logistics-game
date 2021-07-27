@@ -20,6 +20,11 @@ public class HubDrawer : Drawer {
         }
     }
 
+    public override void reset()
+    {
+        if (currentTile != null) currentTile.setMouseOverBehaviour(false);
+    }
+
     protected override void finishDrawing()
     {
         if (currentTile != null)

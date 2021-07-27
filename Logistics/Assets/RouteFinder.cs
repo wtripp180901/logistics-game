@@ -72,9 +72,9 @@ public static class RouteFinder {
     private static List<PfNode> computeNewNodes(PfNode computeFrom,List<PfNode> closedList,List<PfNode> openList)
     {
         List<PfNode> adjacents = new List<PfNode>();
-        for(int i = 0;i < computeFrom.nodeOf.links.Count; i++)
+        for(int i = 0;i < computeFrom.nodeOf.getLinks.Length; i++)
         {
-            PfNode currentNode = new PfNode(computeFrom, computeFrom.nodeOf.links[i]);
+            PfNode currentNode = new PfNode(computeFrom, computeFrom.nodeOf.getLinks[i]);
             bool alreadyInList = false;
             for (int j = 0;j < closedList.Count; j++)
             {

@@ -27,9 +27,16 @@ public static class DrawingManager {
         }
     }
 
+    public static void reset()
+    {
+        if(toDraw != null) toDraw.reset();
+        finishCurrentDrawing();
+    }
+
     public static void finishCurrentDrawing()
     {
         toDraw = null;
+        toDrawNextFrame = null;
         drawingMode = false;
     }
 }

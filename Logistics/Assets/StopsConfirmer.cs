@@ -27,4 +27,9 @@ public class StopsConfirmer : Confirmer {
     {
         VehicleCreatorManager.startCreation(VehicleCreatorFactory.build(vehicleType));
     }
+
+    public override void reset()
+    {
+        
+    }
 }

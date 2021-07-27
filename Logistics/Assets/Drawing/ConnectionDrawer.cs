@@ -35,6 +35,14 @@ public class ConnectionDrawer : Drawer {
         }
     }
 
+    public override void reset()
+    {
+        for(int i = 0;i < line.Count; i++)
+        {
+            line[i].removeFeature();
+        }
+    }
+
     private bool mouseNotInLine()
     {
         for (int i = 0; i < line.Count; i++)

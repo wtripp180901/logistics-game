@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class TransportFeature : Feature
 {
-    public bool fullyLinked = false;
     protected int linkCapacity;
-    public List<TransportFeature> links = new List<TransportFeature>();
+    private List<TransportFeature> links = new List<TransportFeature>(); public TransportFeature[] getLinks { get { return links.ToArray(); } }
     public override bool isTransportFeature { get { return true; } }
 
     public TransportFeature(FEATURES featureType, bool temporary, Tile parent) : base(featureType, temporary, parent)
@@ -23,6 +22,19 @@ public class TransportFeature : Feature
         {
             tryLinkTo((TransportFeature)adjFeats[i]);
         }
+    }
+
+    public void unlink()
+    {
+        for(int i = 0;i < links.Count; i++)
+        {
+            links[i].removeLinkWith(this);
+        }
+    }
+
+    protected void removeLinkWith(TransportFeature toRemove)
+    {
+        links.Remove(toRemove);
     }
 
     //Links this TransportFeature with linkTo if both have available links

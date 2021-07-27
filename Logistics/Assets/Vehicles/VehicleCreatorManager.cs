@@ -25,11 +25,16 @@ public static class VehicleCreatorManager {
         }
     }
 
+    public static void reset()
+    {
+        vehicleCreationMode = false;
+        creator = null;
+    }
+
     public static void finish()
     {
         creator.createVehicle();
-        vehicleCreationMode = false;
-        creator = null;
+        reset();
         //ModelReciever.finishCreationAction();
     }
 }

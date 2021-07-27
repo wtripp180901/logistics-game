@@ -49,9 +49,13 @@ public class Tile {
 
     public void removeFeature()
     {
-        if(_feature != null && _feature.isHub) HubObserver.unsubscribe((TransportHubFeature)_feature);
-        //Unlink
-        //Destroy gameobject
+        if (_feature != null)
+        {
+            if (_feature.isHub) HubObserver.unsubscribe((TransportHubFeature)_feature);
+            if (_feature.isTransportFeature) (_feature as TransportFeature).unlink();
+            Object.Destroy(_feature.gameObject);
+        }
+        _feature = null;
     }
 
     public void confirmFeature()

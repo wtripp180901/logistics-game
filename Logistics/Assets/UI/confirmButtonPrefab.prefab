@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114355701156910544}
   m_Layer: 5
   m_Name: confirmButtonPrefab
-  m_TagString: Untagged
+  m_TagString: confirmationButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
