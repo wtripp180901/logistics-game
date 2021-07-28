@@ -11,17 +11,26 @@ public class ConsumerProducer : IStorage {
     private readonly ITEM_TYPE[] consumes;
     private readonly ITEM_TYPE produces;
     private bool unloadLoadInProgress = false;
+    private HubUIWrapper UI;
 
     private ProductCreator producer;
     public bool canProduce { get { return materials.Count > 0 && products.Count < productLimit; } }
 
-    public ConsumerProducer(ITEM_TYPE[] consumes,ITEM_TYPE produces,int materialLimit,int productLimit)
+    public ConsumerProducer(ITEM_TYPE[] consumes,ITEM_TYPE produces,int materialLimit,int productLimit,Vector2 UIPosition)
     {
         this.consumes = consumes;
         this.produces = produces;
         this.materialLimit = materialLimit;
         this.productLimit = productLimit;
-        producer = new ConsumerProducerProductCreator(this,materials,products,produces);
+
+        UI = new HubUIWrapper(consumes, new ITEM_TYPE[] { produces }, UIPosition);
+        for(int i = 0;i < consumes.Length; i++)
+        {
+            UI.setValue(consumes[i], materials.Count);
+        }
+        UI.setValue(produces, products.Count);
+
+        producer = new ConsumerProducerProductCreator(this, materials, products, produces, UI);
     }
 
     public Item takeItem(ITEM_TYPE item)
@@ -32,6 +41,7 @@ public class ConsumerProducer : IStorage {
             {
                 Item toReturn = products[i];
                 products.RemoveAt(i);
+                UI.setValue(item, products.Count);
                 return toReturn;
             }
         }
@@ -41,6 +51,7 @@ public class ConsumerProducer : IStorage {
     public void giveItem(Item item)
     {
         materials.Add(item);
+        UI.setValue(item.type, materials.Count);
     }
 
     public bool canAcceptItem(ITEM_TYPE type)

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class ProducerProductCreator : ProductCreator {
 
-    public ProducerProductCreator(IStorage parent, List<Item> products, ITEM_TYPE produces) : base(parent, products, produces) { }
+    private HubUIWrapper UI;
+
+    public ProducerProductCreator(IStorage parent, List<Item> products, ITEM_TYPE produces,HubUIWrapper UI) : base(parent, products, produces) { this.UI = UI; }
 
     protected override void produce()
     {
         products.Add(new Item(produces));
+        UI.addItem(produces, 1);
     }
 }

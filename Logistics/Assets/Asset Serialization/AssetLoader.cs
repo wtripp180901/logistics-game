@@ -19,6 +19,9 @@ public class AssetLoader : MonoBehaviour {
         Assets.confirmButtonPrefab = _confirmButtonPrefab;
         Assets.cancelButtonPrefab = _cancelButtonPrefab;
         Assets.stopNumberPrefab = _stopNumberPrefab;
+        Assets.worldCanvas = _worldCanvas;
+        Assets.factoryUIPrefab = _factoryUIPrefab;
+        Destroy(this);
     }
 
     public GameObject _allsidesPrefab;
@@ -33,4 +36,6 @@ public class AssetLoader : MonoBehaviour {
     public GameObject _confirmButtonPrefab;
     public GameObject _cancelButtonPrefab;
     public GameObject _stopNumberPrefab;
+    public Transform _worldCanvas;
+    public GameObject _factoryUIPrefab;
 }

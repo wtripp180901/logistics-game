@@ -17,4 +17,6 @@ public static class Assets {
     public static GameObject confirmButtonPrefab;
     public static GameObject cancelButtonPrefab;
     public static GameObject stopNumberPrefab;
+    public static Transform worldCanvas;
+    public static GameObject factoryUIPrefab;
 }
