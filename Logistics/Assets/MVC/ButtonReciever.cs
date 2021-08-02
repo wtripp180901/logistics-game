@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BUTTON_FUNCTION { OPEN_TRANSPORT_MENU, OPEN_VEHICLE_MENU,CANCEL,CONFIRM }
+public enum BUTTON_FUNCTION { OPEN_TRANSPORT_MENU, OPEN_VEHICLE_MENU,CANCEL,CONFIRM, TOGGLE_PAUSE_PLAY, DOUBLE_SPEED }
 
 public static class ButtonReciever {
 
@@ -23,6 +23,12 @@ public static class ButtonReciever {
             case BUTTON_FUNCTION.CANCEL:
                 ConfirmationManager.cancel();
                 WorldUIStateManager.clear();
+                break;
+            case BUTTON_FUNCTION.TOGGLE_PAUSE_PLAY:
+                TimeManager.togglePausePlay();
+                break;
+            case BUTTON_FUNCTION.DOUBLE_SPEED:
+                TimeManager.toggleDoubleSpeed();
                 break;
             default:
                 UI_STATE nextState;

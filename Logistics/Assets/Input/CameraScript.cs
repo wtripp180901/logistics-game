@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour {
 
     private Camera cam;
-    const float cameraSpeed = 2.5f;
+    const float cameraSpeed = 0.05f;
 
     private void Start()
     {
@@ -16,6 +16,6 @@ public class CameraScript : MonoBehaviour {
     {
         cam.orthographicSize -= InputAdapter.scrollInput;
         Vector2Int screenDrag = InputAdapter.screenDrag;
-        transform.position += new Vector3(screenDrag.x,screenDrag.y,0) * cameraSpeed * cam.orthographicSize * Time.deltaTime;
+        transform.position += new Vector3(screenDrag.x,screenDrag.y,0) * cameraSpeed * cam.orthographicSize;
     }
 }
