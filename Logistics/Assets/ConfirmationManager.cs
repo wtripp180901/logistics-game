@@ -32,7 +32,7 @@ public static class ConfirmationManager {
 
     public static void reset()
     {
-        confirmer.reset();
+        if(confirmer != null) confirmer.reset();
         finish();
     }
 
