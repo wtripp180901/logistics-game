@@ -28,6 +28,6 @@ public class TransportHubFeature : TransportFeature {
 
     protected override GameObject getSprite()
     {
-        return Assets.railyardPrefab;
+        return Assets.assets.railyardPrefab;
     }
 }

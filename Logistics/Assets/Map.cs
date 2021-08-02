@@ -15,9 +15,9 @@ public class Map {
         buildMap();
 
         //Creating world space UI renderer
-        float mapWidth = data[0].Length * Assets.tilePrefabWidth;
-        float mapHeight = data.Length * Assets.tilePrefabWidth;
-        RectTransform rect = Assets.worldCanvas.GetComponent<RectTransform>();
+        float mapWidth = data[0].Length * Assets.assets.tilePrefabWidth;
+        float mapHeight = data.Length * Assets.assets.tilePrefabWidth;
+        RectTransform rect = Assets.assets.worldCanvas.GetComponent<RectTransform>();
         rect.position = new Vector2(mapWidth / 2, mapHeight / 2);
         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, mapWidth);
         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, mapHeight);

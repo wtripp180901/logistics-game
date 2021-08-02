@@ -6,8 +6,8 @@ public class AssetLoader : MonoBehaviour {
 
     private void Awake()
     {
-        Assets.allsidesPrefab = _allsidesPrefab;
-        Assets.tilePrefabWidth = _allsidesPrefab.GetComponent<SpriteRenderer>().bounds.extents.x * 2;
+        /*Assets.allsidesPrefab = _allsidesPrefab;
+        Assets.
         Assets.railOnesidePrefab = _railOnesidePrefab;
         Assets.railyardPrefab = _railyardPrefab;
         Assets.trainPrefab = _trainPrefab;
@@ -21,21 +21,25 @@ public class AssetLoader : MonoBehaviour {
         Assets.stopNumberPrefab = _stopNumberPrefab;
         Assets.worldCanvas = _worldCanvas;
         Assets.factoryUIPrefab = _factoryUIPrefab;
-        Destroy(this);
+        Destroy(this);*/
+        tilePrefabWidth = allsidesPrefab.GetComponent<SpriteRenderer>().bounds.extents.x * 2;
+        Assets.assets = this;
+
     }
 
-    public GameObject _allsidesPrefab;
-    public GameObject _railOnesidePrefab;
-    public GameObject _railyardPrefab;
-    public GameObject _trainPrefab;
-    public GameObject _openTransportButtonPrefab;
-    public GameObject _openVehicleButtonPrefab;
-    public GameObject _vehicleBarPrefab;
-    public Transform _canvas;
-    public GameObject _transportBarPrefab;
-    public GameObject _confirmButtonPrefab;
-    public GameObject _cancelButtonPrefab;
-    public GameObject _stopNumberPrefab;
-    public Transform _worldCanvas;
-    public GameObject _factoryUIPrefab;
+    public float tilePrefabWidth;
+    public GameObject allsidesPrefab;
+    public GameObject railOnesidePrefab;
+    public GameObject railyardPrefab;
+    public GameObject trainPrefab;
+    public GameObject openTransportButtonPrefab;
+    public GameObject openVehicleButtonPrefab;
+    public GameObject vehicleBarPrefab;
+    public Transform canvas;
+    public GameObject transportBarPrefab;
+    public GameObject confirmButtonPrefab;
+    public GameObject cancelButtonPrefab;
+    public GameObject stopNumberPrefab;
+    public Transform worldCanvas;
+    public GameObject factoryUIPrefab;
 }

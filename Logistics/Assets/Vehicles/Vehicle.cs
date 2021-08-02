@@ -26,7 +26,7 @@ public class Vehicle {
     {
         this.routes = routes;
         const float vehicleLayer = -0.15f;
-        gameObject = Object.Instantiate(Assets.trainPrefab, (Vector3)routes.First.Value.source.parent.position + new Vector3(0,0,vehicleLayer), Quaternion.identity);
+        gameObject = Object.Instantiate(Assets.assets.trainPrefab, (Vector3)routes.First.Value.source.parent.position + new Vector3(0,0,vehicleLayer), Quaternion.identity);
         transform = gameObject.transform;
         currentJourneyNode = this.routes.First;
         currentVectorTarget = currentJourneyNode.Value.path[0];

@@ -34,7 +34,7 @@ public class HubUIWrapper {
 
     private void createUIElement(ITEM_TYPE itemType,Vector2 position)
     {
-        GameObject go = Object.Instantiate(Assets.factoryUIPrefab, Assets.worldCanvas);
+        GameObject go = Object.Instantiate(Assets.assets.factoryUIPrefab, Assets.assets.worldCanvas);
         go.transform.position = position;
         /*Sprite sprite;
         iconsForItemType.TryGetValue(itemType, out sprite);

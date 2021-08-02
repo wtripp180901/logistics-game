@@ -28,7 +28,7 @@ public abstract class Feature {
 
     protected virtual GameObject getSprite()
     {
-        return Assets.railOnesidePrefab;
+        return Assets.assets.railOnesidePrefab;
     }
 
 }

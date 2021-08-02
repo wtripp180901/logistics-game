@@ -57,7 +57,7 @@ public static class WorldUIStateManager {
 
     public static GameObject createWorldUI(GameObject asset, Vector2 position)
     {
-        GameObject worldUI = Object.Instantiate(asset, Assets.canvas);
+        GameObject worldUI = Object.Instantiate(asset, Assets.assets.canvas);
         worldUI.GetComponent<WorldUIScript>().worldPosition = new Vector3(position.x, position.y, -0.3f);
         currentWorldUI.Add(worldUI);
         return worldUI;

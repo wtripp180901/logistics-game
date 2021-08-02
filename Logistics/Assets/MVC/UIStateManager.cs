@@ -20,10 +20,10 @@ public static class UIStateManager {
 
     private static Dictionary<UI_STATE, GameObject[]> objectsToRenderDictionary = new Dictionary<UI_STATE, GameObject[]>()
     {
-        { UI_STATE.NEUTRAL, new GameObject[] {Assets.openTransportButtonPrefab,Assets.openVehicleButtonPrefab} },
+        { UI_STATE.NEUTRAL, new GameObject[] {Assets.assets.openTransportButtonPrefab,Assets.assets.openVehicleButtonPrefab } },
         { UI_STATE.BLANK, new GameObject[0] },
-        { UI_STATE.VEHICLE_MENU, new GameObject[] {Assets.vehicleBarPrefab} },
-        { UI_STATE.TRANSPORT_MENU, new GameObject[] {Assets.transportBarPrefab} }
+        { UI_STATE.VEHICLE_MENU, new GameObject[] {Assets.assets.vehicleBarPrefab } },
+        { UI_STATE.TRANSPORT_MENU, new GameObject[] {Assets.assets.transportBarPrefab } }
     };
 
 	public static void changeState(UI_STATE state)
@@ -53,7 +53,7 @@ public static class UIStateManager {
     {
         for (int i = 0; i < toCreate.Length; i++)
         {
-            currentUI.Add(Object.Instantiate(toCreate[i], Assets.canvas));
+            currentUI.Add(Object.Instantiate(toCreate[i], Assets.assets.canvas));
         }
     }
 

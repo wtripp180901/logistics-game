@@ -61,7 +61,7 @@ public abstract class VehicleCreator {
                 }
                 else if (System.Array.Exists(availableHubs, x => x == hub))
                 {
-                    ModelReciever.createStopNumberUI(Assets.stopNumberPrefab, hub,stopCount.ToString());
+                    ModelReciever.createStopNumberUI(Assets.assets.stopNumberPrefab, hub,stopCount.ToString());
                     hubs.Push(hub);
                     stopCount += 1;
                 }

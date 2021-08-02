@@ -67,7 +67,7 @@ public class Tile {
     //Instantiates the GameObject representing this tile
     public void render()
     {
-        gameObject = Object.Instantiate(Assets.allsidesPrefab, position, Quaternion.identity);
+        gameObject = Object.Instantiate(Assets.assets.allsidesPrefab, position, Quaternion.identity);
     }
 
     public void renderFeature()
@@ -96,7 +96,7 @@ public class Tile {
     }
 
     //Returns true if point is inside tile's sprite
-    private static float bounds = Assets.tilePrefabWidth / 2;
+    private static float bounds = Assets.assets.tilePrefabWidth / 2;
     public bool pointInside(Vector2 pos)
     {
         return

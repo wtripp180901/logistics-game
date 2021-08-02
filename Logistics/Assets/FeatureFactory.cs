@@ -26,7 +26,7 @@ public static class FeatureFactory {
 
     private static IStorage makeStorage(FEATURES featureType,Tile parent)
     {
-        Vector2 UIPosition = new Vector2(parent.position.x, parent.position.y + Assets.tilePrefabWidth);
+        Vector2 UIPosition = new Vector2(parent.position.x, parent.position.y + Assets.assets.tilePrefabWidth);
         switch (featureType)
         {
             case FEATURES.RAILYARD:

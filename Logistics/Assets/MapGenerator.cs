@@ -70,7 +70,7 @@ public class MapGenerator : IMapDataGenerator {
     //Instantiates tile at given coordinates * scaling factor from sprite
     private static Tile tileFromCoords(Vector2Int coords)
     {
-        return new Tile(coords.x * Assets.tilePrefabWidth, coords.y * Assets.tilePrefabWidth);
+        return new Tile(coords.x * Assets.assets.tilePrefabWidth, coords.y * Assets.assets.tilePrefabWidth);
     }
 
     //Finds the coordinates of a tile with free adjacent spaces
