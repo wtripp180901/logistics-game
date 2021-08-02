@@ -10,6 +10,11 @@ public static class ModelReciever {
         UIStateManager.changeState(UI_STATE.NEUTRAL);
     }
 
+    public static void updateGoalBar(int money,int goal)
+    {
+        PermanentUIManager.updateGoalBar(money,goal);
+    }
+
     public static void exitCurrentState()
     {
         DrawingManager.reset();

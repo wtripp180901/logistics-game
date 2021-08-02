@@ -12,6 +12,7 @@ public class Main : MonoBehaviour {
         map = new Map(new MapGenerator(2, 900, 10, 10));
         VehicleCreatorFactory.initialise(map);
         DrawerFactory.initialise(map);
+        PermanentUIManager.initialise();
     }
 
     TransportHubFeature source;
@@ -59,7 +60,9 @@ public class Main : MonoBehaviour {
         }
         if (Input.GetKeyDown("f")) VehicleCreatorManager.startCreation(new GroundVehicleCreator(map));
         if (Input.GetKeyDown("g")) VehicleCreatorManager.startCreation(new PlaneVehicleCreator(map));
+        if (Input.GetKeyDown("m")) MoneyManager.addMoney(10);
         //****************************************************
+        MoneyManager.Update();
         DrawingManager.Update(map);
         VehicleCreatorManager.Update();
         VehicleManager.Update();

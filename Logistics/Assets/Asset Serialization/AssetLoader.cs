@@ -42,4 +42,5 @@ public class AssetLoader : MonoBehaviour {
     public GameObject stopNumberPrefab;
     public Transform worldCanvas;
     public GameObject factoryUIPrefab;
+    public GameObject goalBarPrefab;
 }
