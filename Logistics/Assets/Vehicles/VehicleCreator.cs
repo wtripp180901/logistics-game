@@ -45,8 +45,8 @@ public abstract class VehicleCreator {
     //Pushes and pops stops on journey to hubs
     public void routeCreation()
     {
-        Tile currentTile = map.tileWithMouseInside();
-        if (currentTile.isGroundTile)
+        GroundTile currentTile = map.tileWithMouseInside();
+        if (currentTile != null)
         {
             Feature currentFeature = (currentTile as GroundTile).getFeature(false);
             if (currentFeature != null && currentFeature.isHub)
@@ -66,7 +66,7 @@ public abstract class VehicleCreator {
                     stopCount += 1;
                 }
                 setAvailableHubs();
-                ConfirmationManager.requestConfirmation(hubs.Peek().parent.position, vehicleType);
+                if(hubs.Count > 1) ConfirmationManager.requestConfirmation(hubs.Peek().parent.position, vehicleType);
             }
         }
     }
