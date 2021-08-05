@@ -14,7 +14,7 @@ public struct Journey {
     {
         this.source = source;
         this.destination = destination;
-        path = RouteFinder.findPath(source,destination);
+        path = new GroundRouteFinder().findPath(source,destination);
         valid = path != null;
         playerSpecified = true;
     }

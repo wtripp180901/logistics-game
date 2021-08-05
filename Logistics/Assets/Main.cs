@@ -51,13 +51,6 @@ public class Main : MonoBehaviour {
         }
         if (Input.GetKeyDown("s")) source = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);
         if (Input.GetKeyDown("w")) dest = (TransportHubFeature)map.tileWithMouseInside().getFeature(false);
-        if (Input.GetKeyDown("r"))
-        {
-            foreach(Vector2 v in RouteFinder.findPath(source, dest))
-            {
-                Debug.Log(v);
-            }
-        }
         if (Input.GetKeyDown("f")) VehicleCreatorManager.startCreation(new GroundVehicleCreator(map));
         if (Input.GetKeyDown("g")) VehicleCreatorManager.startCreation(new PlaneVehicleCreator(map));
         if (Input.GetKeyDown("m")) MoneyManager.addMoney(10);

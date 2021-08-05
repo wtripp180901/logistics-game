@@ -10,7 +10,7 @@ public class GroundVehicleCreator : VehicleCreator {
 
     protected override List<Vector2> getPathOrNull(TransportHubFeature source, TransportHubFeature destination)
     {
-        return RouteFinder.findPath(source, destination);
+        return new GroundRouteFinder().findPath(source, destination);
     }
 
     protected override TransportHubFeature[] getAllRelevantHubs()
