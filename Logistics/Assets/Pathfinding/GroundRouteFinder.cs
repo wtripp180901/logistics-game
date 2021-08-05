@@ -4,27 +4,14 @@ using UnityEngine;
 
 public class GroundRouteFinder : RouteFinder {
 
-    protected override List<PfNode> computeNewNodes(PfNode computeFrom, List<PfNode> closedList, List<PfNode> openList)
+    protected override PfNode[] makeAdjacentPfNodes(PfNode computeFrom)
     {
-        List<PfNode> adjacents = new List<PfNode>();
-        for (int i = 0; i < computeFrom.nodeOf.getLinks.Length; i++)
+        TransportFeature[] links = computeFrom.nodeOf.getLinks;
+        List<PfNode> nodes = new List<PfNode>();
+        for (int i = 0; i < links.Length; i++)
         {
-            PfNode currentNode = new PfNode(computeFrom, computeFrom.nodeOf.getLinks[i], destinationPosition);
-            bool alreadyInList = false;
-            for (int j = 0; j < closedList.Count; j++)
-            {
-                if (nodesEqual(closedList[j], currentNode)) alreadyInList = true;
-            }
-            for (int j = 0; j < openList.Count; j++)
-            {
-                if (nodesEqual(openList[j], currentNode) && currentNode.g < openList[j].g)
-                {
-                    alreadyInList = true;
-                    openList[j] = currentNode;
-                }
-            }
-            if (!alreadyInList) adjacents.Add(currentNode);
+            nodes.Add(new PfNode(computeFrom, computeFrom.nodeOf.getLinks[i], destinationPosition));
         }
-        return adjacents;
+        return nodes.ToArray();
     }
 }

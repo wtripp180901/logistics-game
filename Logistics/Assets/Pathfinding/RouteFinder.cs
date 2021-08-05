@@ -22,6 +22,16 @@ public abstract class RouteFinder {
             else g = 1 + parent.g;
             h = (int)(destinationPosition - position).magnitude;
         }
+
+        public PfNode(PfNode parent,Vector2 position,Vector2 destinationPosition)
+        {
+            nodeOf = null;
+            this.parent = parent;
+            this.position = position;
+            if (parent == null) g = 1;
+            else g = 1 + parent.g;
+            h = (int)(destinationPosition - position).magnitude;
+        }
     }
 
     protected Vector2 destinationPosition;
@@ -69,7 +79,32 @@ public abstract class RouteFinder {
         else return -1;
     }
 
-    protected abstract List<PfNode> computeNewNodes(PfNode computeFrom, List<PfNode> closedList, List<PfNode> openList);
+    private List<PfNode> computeNewNodes(PfNode computeFrom, List<PfNode> closedList, List<PfNode> openList)
+    {
+        List<PfNode> adjacents = new List<PfNode>();
+        PfNode[] possibleAdjacents = makeAdjacentPfNodes(computeFrom);
+        for (int i = 0; i < possibleAdjacents.Length; i++)
+        {
+            PfNode currentNode = possibleAdjacents[i];
+            bool alreadyInList = false;
+            for (int j = 0; j < closedList.Count; j++)
+            {
+                if (nodesEqual(closedList[j], currentNode)) alreadyInList = true;
+            }
+            for (int j = 0; j < openList.Count; j++)
+            {
+                if (nodesEqual(openList[j], currentNode) && currentNode.g < openList[j].g)
+                {
+                    alreadyInList = true;
+                    openList[j] = currentNode;
+                }
+            }
+            if (!alreadyInList) adjacents.Add(currentNode);
+        }
+        return adjacents;
+    }
+
+    protected abstract PfNode[] makeAdjacentPfNodes(PfNode computeFrom);
 
     protected static bool nodesEqual(PfNode x,PfNode y)
     {

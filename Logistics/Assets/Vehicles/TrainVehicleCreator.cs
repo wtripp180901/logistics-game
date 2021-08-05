@@ -10,7 +10,7 @@ public class TrainVehicleCreator : VehicleCreator {
     {
         get
         {
-            throw new System.NotImplementedException();
+            return VEHICLE.TRAIN;
         }
     }
 
