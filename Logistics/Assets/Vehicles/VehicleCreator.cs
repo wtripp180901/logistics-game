@@ -46,9 +46,9 @@ public abstract class VehicleCreator {
     public void routeCreation()
     {
         Tile currentTile = map.tileWithMouseInside();
-        if (currentTile != null)
+        if (currentTile.isGroundTile)
         {
-            Feature currentFeature = currentTile.getFeature(false);
+            Feature currentFeature = (currentTile as GroundTile).getFeature(false);
             if (currentFeature != null && currentFeature.isHub)
             {
                 TransportHubFeature hub = (TransportHubFeature)currentFeature;

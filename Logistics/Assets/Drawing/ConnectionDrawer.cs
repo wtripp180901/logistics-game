@@ -5,7 +5,7 @@ using UnityEngine;
 public class ConnectionDrawer : Drawer {
 
     private bool startedLine = false;
-    private List<Tile> line = new List<Tile>();
+    private List<GroundTile> line = new List<GroundTile>();
 
     public ConnectionDrawer(Map map,FEATURES toDraw) : base(map,toDraw){}
 
@@ -17,7 +17,7 @@ public class ConnectionDrawer : Drawer {
             {
                 if (mouseNotInLine())
                 {
-                    Tile mouseTile = map.tileWithMouseInside();
+                    GroundTile mouseTile = (GroundTile)map.tileWithMouseInside();
                     if (mouseTile != null && (line.Count == 0 || line[line.Count - 1].adjacentTo(mouseTile)))
                     {
                         line.Add(mouseTile);

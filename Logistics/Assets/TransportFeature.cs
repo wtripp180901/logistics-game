@@ -53,9 +53,10 @@ public class TransportFeature : Feature
         List<Feature> adjFeats = new List<Feature>();
         for (int i = 0; i < parent.adjacentTiles.Length; i++)
         {
-            if (parent.adjacentTiles[i] != null)
+            if (parent.adjacentTiles[i].isGroundTile)
             {
-                Feature feat = parent.adjacentTiles[i].getFeature(temporary);
+                GroundTile currentTile = (GroundTile)parent.adjacentTiles[i];
+                Feature feat = currentTile.getFeature(temporary);
                 TransportFeature transportFeature;
                 if(feat != null && feat.isTransportFeature) {
                     transportFeature = (TransportFeature)feat;

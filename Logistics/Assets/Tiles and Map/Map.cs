@@ -5,7 +5,8 @@ using UnityEngine;
 public class Map {
 
     private Tile[][] data;
-    private List<Tile> playTiles = new List<Tile>();
+    private List<GroundTile> playTiles = new List<GroundTile>();
+    List<WaterTile> waterTiles = new List<WaterTile>();
     private CoordinateValidator validator;
 
     public Map(IMapDataGenerator dataGenerator)
@@ -33,21 +34,26 @@ public class Map {
             for (int x = 0; x < data[0].Length; x++)
             {
                 Tile currentTile = getTile(x, y);
-                if (currentTile != null)
+                if (validator.valid(x - 1, y) && getTile(x - 1, y) != null) currentTile.left = getTile(x - 1, y);
+                if (validator.valid(x + 1, y) && getTile(x + 1, y) != null) currentTile.right = getTile(x + 1, y);
+                if (validator.valid(x, y - 1) && getTile(x, y - 1) != null) currentTile.down = getTile(x, y - 1);
+                if (validator.valid(x, y + 1) && getTile(x, y + 1) != null) currentTile.up = getTile(x, y + 1);
+                if (currentTile.isGroundTile)
                 {
-                    if (validator.valid(x - 1, y) && getTile(x - 1, y) != null) currentTile.left = getTile(x - 1, y);
-                    if (validator.valid(x + 1, y) && getTile(x + 1, y) != null) currentTile.right = getTile(x + 1, y);
-                    if (validator.valid(x, y - 1) && getTile(x, y - 1) != null) currentTile.down = getTile(x, y - 1);
-                    if (validator.valid(x, y + 1) && getTile(x, y + 1) != null) currentTile.up = getTile(x, y + 1);
-                    currentTile.render();
-                    currentTile.renderFeature();
-                    playTiles.Add(currentTile);
+                    GroundTile groundTile = (GroundTile)currentTile;
+                    groundTile.render();
+                    groundTile.renderFeature();
+                    playTiles.Add(groundTile);
+                }
+                else
+                {
+                    waterTiles.Add((WaterTile)currentTile);
                 }
             }
         }
     }
 
-    public Tile tileWithMouseInside()
+    public GroundTile tileWithMouseInside()
     {
         for(int i = 0;i < playTiles.Count; i++)
         {

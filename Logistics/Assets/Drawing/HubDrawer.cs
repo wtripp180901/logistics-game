@@ -6,8 +6,8 @@ public class HubDrawer : Drawer {
 
     public HubDrawer(Map map, FEATURES toDraw) : base(map, toDraw) { }
 
-    private Tile prevTile = null;
-    private Tile currentTile = null;
+    private GroundTile prevTile = null;
+    private GroundTile currentTile = null;
 
     protected override void concreteUpdate()
     {

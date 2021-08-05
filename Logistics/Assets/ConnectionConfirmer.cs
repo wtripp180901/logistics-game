@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ConnectionConfirmer : Confirmer {
 
-    private Tile[] toConfirm;
+    private GroundTile[] toConfirm;
 
-    public ConnectionConfirmer(List<Tile> toConfirm)
+    public ConnectionConfirmer(List<GroundTile> toConfirm)
     {
         this.toConfirm = toConfirm.ToArray();
     }

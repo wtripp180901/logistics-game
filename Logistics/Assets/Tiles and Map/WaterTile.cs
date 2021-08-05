@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class WaterTile : Tile {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public WaterTile(float x, float y) : base(x, y) { }
+
+    public override bool isGroundTile
+    {
+        get
+        {
+            return false;
+        }
+    }
 }

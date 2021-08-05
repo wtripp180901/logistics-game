@@ -48,7 +48,7 @@ public class MapGenerator : IMapDataGenerator {
     {
         Vector2Int currentCoords = new Vector2Int(startX, startY);
         DIRECTIONS lastDir = DIRECTIONS.DOWN;
-        map[startY][startX] = tileFromCoords(currentCoords);
+        map[startY][startX] = tileFromCoords(currentCoords,true);
         List<Vector2Int> filledCoords = new List<Vector2Int>() { new Vector2Int(startX,startY) };
         for (int i = 0;i < tileCount - 1; i++)
         {
@@ -63,14 +63,23 @@ public class MapGenerator : IMapDataGenerator {
             currentCoords = moveInfo.newCoords;
             lastDir = moveInfo.direction;
             filledCoords.Add(currentCoords);
-            map[currentCoords.y][currentCoords.x] = tileFromCoords(currentCoords);
+            map[currentCoords.y][currentCoords.x] = tileFromCoords(currentCoords,true);
         }
     }
 
     //Instantiates tile at given coordinates * scaling factor from sprite
-    private static Tile tileFromCoords(Vector2Int coords)
+    private static Tile tileFromCoords(Vector2Int coords,bool groundTile)
     {
-        return new Tile(coords.x * Assets.assets.tilePrefabWidth, coords.y * Assets.assets.tilePrefabWidth);
+        float x = coords.x * Assets.assets.tilePrefabWidth;
+        float y = coords.y * Assets.assets.tilePrefabWidth;
+        if (groundTile)
+        {
+            return new GroundTile(x, y);
+        }
+        else
+        {
+            return new WaterTile(x, y);
+        }
     }
 
     //Finds the coordinates of a tile with free adjacent spaces
@@ -112,10 +121,10 @@ public class MapGenerator : IMapDataGenerator {
             DIRECTIONS.UP,DIRECTIONS.UP, DIRECTIONS.UP,
             DIRECTIONS.DOWN,DIRECTIONS.DOWN, DIRECTIONS.DOWN };
         randomSet.Add(lastDir);
-        if (!validator.valid(currentCoords.x - 1, currentCoords.y) || map[currentCoords.y][currentCoords.x - 1] != null) randomSet.RemoveAll(d => d == DIRECTIONS.LEFT);
-        if (!validator.valid(currentCoords.x + 1, currentCoords.y) || map[currentCoords.y][currentCoords.x + 1] != null) randomSet.RemoveAll(d => d == DIRECTIONS.RIGHT);
-        if (!validator.valid(currentCoords.x, currentCoords.y - 1) || map[currentCoords.y - 1][currentCoords.x] != null) randomSet.RemoveAll(d => d == DIRECTIONS.DOWN);
-        if (!validator.valid(currentCoords.x, currentCoords.y + 1) || map[currentCoords.y + 1][currentCoords.x] != null) randomSet.RemoveAll(d => d == DIRECTIONS.UP);
+        if (!validator.valid(currentCoords.x - 1, currentCoords.y) || map[currentCoords.y][currentCoords.x - 1].isGroundTile) randomSet.RemoveAll(d => d == DIRECTIONS.LEFT);
+        if (!validator.valid(currentCoords.x + 1, currentCoords.y) || map[currentCoords.y][currentCoords.x + 1].isGroundTile) randomSet.RemoveAll(d => d == DIRECTIONS.RIGHT);
+        if (!validator.valid(currentCoords.x, currentCoords.y - 1) || map[currentCoords.y - 1][currentCoords.x].isGroundTile) randomSet.RemoveAll(d => d == DIRECTIONS.DOWN);
+        if (!validator.valid(currentCoords.x, currentCoords.y + 1) || map[currentCoords.y + 1][currentCoords.x].isGroundTile) randomSet.RemoveAll(d => d == DIRECTIONS.UP);
         return randomSet;
     }
 
@@ -127,7 +136,7 @@ public class MapGenerator : IMapDataGenerator {
             List<Tile> row = new List<Tile>();
             for (int x = 0; x < width; x++)
             {
-                row.Add(null);
+                row.Add(tileFromCoords(new Vector2Int(x,y),false));
             }
             map.Add(row.ToArray());
         }

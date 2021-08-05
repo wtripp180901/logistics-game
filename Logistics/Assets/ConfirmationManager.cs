@@ -6,7 +6,7 @@ public static class ConfirmationManager {
 
     private static Confirmer confirmer;
 
-    public static void requestConfirmation(List<Tile> toConfirm)
+    public static void requestConfirmation(List<GroundTile> toConfirm)
     {
         confirmer = new ConnectionConfirmer(toConfirm);
         confirmer.createUI();
