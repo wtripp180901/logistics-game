@@ -5,7 +5,7 @@ using UnityEngine;
 public static class MoneyManager {
 
     private static int money = 0;
-    private static float timeToGoal = 10f;
+    private static float timeToGoal = 120f;
     private static int goalMoney = 100;
 
 
