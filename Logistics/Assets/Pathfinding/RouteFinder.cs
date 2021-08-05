@@ -4,36 +4,6 @@ using UnityEngine;
 
 public abstract class RouteFinder {
 
-    protected class PfNode
-    {
-        public int g;
-        public int h;
-        public int f { get { return h + g; } }
-        public readonly Vector2 position;
-        public PfNode parent;
-        public TransportFeature nodeOf;
-
-        public PfNode(PfNode parent,TransportFeature nodeOf,Vector2 destinationPosition)
-        {
-            this.nodeOf = nodeOf;
-            this.parent = parent;
-            position = nodeOf.parent.position;
-            if (parent == null) g = 1;
-            else g = 1 + parent.g;
-            h = (int)(destinationPosition - position).magnitude;
-        }
-
-        public PfNode(PfNode parent,Vector2 position,Vector2 destinationPosition)
-        {
-            nodeOf = null;
-            this.parent = parent;
-            this.position = position;
-            if (parent == null) g = 1;
-            else g = 1 + parent.g;
-            h = (int)(destinationPosition - position).magnitude;
-        }
-    }
-
     protected Vector2 destinationPosition;
 
     public List<Vector2> findPath(TransportHubFeature source,TransportHubFeature destination)
@@ -42,7 +12,7 @@ public abstract class RouteFinder {
         List<PfNode> closedList = new List<PfNode>();
         destinationPosition = destination.parent.position;
 
-        PfNode currentNode = new PfNode(null, source, destinationPosition);
+        PfNode currentNode = initialNode(source);
         closedList.Add(currentNode);
         openList.AddRange(computeNewNodes(closedList[0], closedList, openList));
 
@@ -71,6 +41,8 @@ public abstract class RouteFinder {
         }
 
     }
+
+    protected abstract PfNode initialNode(TransportHubFeature source);
 
     private static int sortingFunction(PfNode x,PfNode y)
     {
