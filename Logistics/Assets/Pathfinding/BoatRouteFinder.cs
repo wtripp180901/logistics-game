@@ -10,11 +10,17 @@ public class BoatRouteFinder : RouteFinder {
         List<BoatPfNode> nodes = new List<BoatPfNode>();
         for (int i = 0; i < links.Length; i++)
         {
-            if (!links[i].isGroundTile ||
-                (links[i].isGroundTile && (links[i] as GroundTile).getFeature(false).featureType == FEATURES.SEAPORT)
-                ){
-                nodes.Add(new BoatPfNode(computeFrom, destinationPosition,links[i]));
+            bool acceptableTile = false;
+            if (links[i] != null)
+            {
+                if (!links[i].isGroundTile) acceptableTile = true;
+                else
+                {
+                    Feature feature = (links[i] as GroundTile).getFeature(false);
+                    if (links[i].isGroundTile && feature != null && feature.featureType == FEATURES.SEAPORT) acceptableTile = true;
+                }
             }
+            if(acceptableTile) nodes.Add(new BoatPfNode(computeFrom, destinationPosition, links[i]));
         }
         return nodes.ToArray();
     }

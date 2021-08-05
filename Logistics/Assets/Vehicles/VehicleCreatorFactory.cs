@@ -22,6 +22,8 @@ public static class VehicleCreatorFactory {
                 return new PlaneVehicleCreator(map);
             case VEHICLE.TRAIN:
                 return new TrainVehicleCreator(map);
+            case VEHICLE.BOAT:
+                return new BoatVehicleCreator(map);
             default: throw new System.Exception("Vehicle not implemented");
         }
     }

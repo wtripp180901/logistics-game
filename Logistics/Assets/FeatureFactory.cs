@@ -13,6 +13,7 @@ public static class FeatureFactory {
             case FEATURES.ROAD:
             case FEATURES.RAIL:
                 return new TransportFeature(featureType,temporary,parent);
+            case FEATURES.SEAPORT:
             case FEATURES.RAILYARD:
             case FEATURES.AIRPORT:
                 return new TransportHubFeature(featureType, temporary, parent, new FEATURES[2] { FEATURES.RAIL, FEATURES.ROAD },makeStorage(featureType,parent));
@@ -31,6 +32,7 @@ public static class FeatureFactory {
         {
             case FEATURES.RAILYARD:
             case FEATURES.AIRPORT:
+            case FEATURES.SEAPORT:
                 return new Shed(8);
             case FEATURES.FOOD_FACTORY:
                 return new ConsumerProducer(new ITEM_TYPE[1] { ITEM_TYPE.MEAT }, ITEM_TYPE.FOOD, 4, 4,UIPosition);

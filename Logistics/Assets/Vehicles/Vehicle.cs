@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum VEHICLE { VAN, TRAIN, PLANE}
+public enum VEHICLE { VAN, TRAIN, PLANE,BOAT}
 
 public class Vehicle {
     private LinkedList<Journey> routes;

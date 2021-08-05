@@ -6,7 +6,7 @@ public class GroundVehicleCreator : VehicleCreator {
 
     public GroundVehicleCreator(Map map) : base(map) { }
 
-    protected override VEHICLE vehicleType { get { throw new System.NotImplementedException(); } }
+    protected override VEHICLE vehicleType { get { return VEHICLE.VAN; } }
 
     protected override List<Vector2> getPathOrNull(TransportHubFeature source, TransportHubFeature destination)
     {

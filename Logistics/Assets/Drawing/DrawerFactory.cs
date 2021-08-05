@@ -17,6 +17,7 @@ public static class DrawerFactory {
         {
             case FEATURES.RAILYARD:
             case FEATURES.AIRPORT:
+            case FEATURES.SEAPORT:
                 return new HubDrawer(map, feature);
             case FEATURES.RAIL:
             case FEATURES.ROAD:
