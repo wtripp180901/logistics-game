@@ -54,6 +54,8 @@ public class Main : MonoBehaviour {
         if (Input.GetKeyDown("f")) VehicleCreatorManager.startCreation(new GroundVehicleCreator(map));
         if (Input.GetKeyDown("g")) VehicleCreatorManager.startCreation(new PlaneVehicleCreator(map));
         if (Input.GetKeyDown("m")) MoneyManager.addMoney(10);
+        if (Input.GetKeyDown(KeyCode.RightControl)) Saver.save();
+        if (Input.GetKeyDown("o")) Loader.load("SaveData/savedata.dat");
         //****************************************************
         MoneyManager.Update();
         DrawingManager.Update(map);

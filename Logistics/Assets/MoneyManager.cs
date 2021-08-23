@@ -43,4 +43,17 @@ public static class MoneyManager {
     {
         timeToGoal = 10f;
     }
+
+    public static void setData(MoneyManagerData data)
+    {
+        money = data.money;
+        timeToGoal = data.money;
+        goalMoney = data.goalMoney;
+        ModelReciever.updateGoalBar(money, goalMoney);
+    }
+
+    public static MoneyManagerData getSaveData()
+    {
+        return new MoneyManagerData(money, timeToGoal, goalMoney);
+    }
 }
